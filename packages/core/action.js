@@ -4,7 +4,7 @@ export default function (actions) {
   for (const key in actions) {
     const action = actions[key]
 
-    actionsFun[key] = new Function('text', 'record', 'index', action)
+    actionsFun[key] = new Function('$event', 'text', 'record', 'index', action)
   }
 
   return actionsFun

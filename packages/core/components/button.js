@@ -9,7 +9,7 @@ export default function (options) {
     const attrs = {
       'zero-button': true
     }
-    const _action = () => this[action](text, record, index)
+    const _action = ($event) => this[action]($event, text, record, index)
 
     if (confirm) {
       return h('a-popconfirm', {

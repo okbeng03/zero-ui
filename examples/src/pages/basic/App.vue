@@ -205,10 +205,10 @@ export default {
               return
             }
 
-            console.log(selectedRowKeys)
+            console.log(selectedRowKeys, $event)
           `,
           onDetail: `
-            console.log(111)
+            console.log(111, $event)
           `,
           onEdit: `
             console.log(222, record, index)
