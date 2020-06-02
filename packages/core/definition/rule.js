@@ -1,5 +1,8 @@
 import operationParser from '../components/operation'
 
-export default {
-  operation: operationParser
-}
+export default [
+  {
+    name: 'operation',
+    parse: operationParser
+  }
+]

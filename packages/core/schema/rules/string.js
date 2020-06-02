@@ -1,5 +1,5 @@
 import moment from 'moment'
-import _ from 'lodash'
+import { find } from 'lodash'
 
 const momentFormatMap = {
   date: 'YYYY-MM-DD',
@@ -12,16 +12,18 @@ export default function (key, schema, parentSchema, definition = {}, options = {
   const column = {}
 
   if (format) {
-    let customRender
+    let render
 
     if (format === 'email') {
-      customRender = (h, value, record, index) => {
-        return <a href="mailto:{ value }">{ value }</a>
+      render = function (h, text, record, index) {
+        const value = `mailto:${text}`
+
+        return <a href={ value }>{ text }</a>
       }
     }
 
     if (format === 'date' || format === 'date-time' || format === 'time') {
-      customRender = function (h, text, record, index) {
+      render = function (h, text, record, index) {
         const value = moment(text).format(options.format || momentFormatMap[format])
 
         return <span>{ value }</span>
@@ -29,13 +31,13 @@ export default function (key, schema, parentSchema, definition = {}, options = {
     }
 
     if (format === 'uri') {
-      customRender = function (h, text, record, index) {
+      render = function (h, text, record, index) {
         return <a href={ text } target={ options.target || '_blank' }>{ text }</a>
       }
     }
 
     if (format === 'image') {
-      customRender = function (h, text, record, index) {
+      render = function (h, text, record, index) {
         const style = {
           width: options.width || '120px',
           height: options.height || '120px'
@@ -45,14 +47,14 @@ export default function (key, schema, parentSchema, definition = {}, options = {
       }
     }
 
-    if (customRender) {
-      column._customRender = customRender
+    if (render) {
+      column.render = render
     }
   }
 
   if (enums && options.options) {
-    column._customRender = function (h, text, record, index) {
-      const item = _.find(options.options, (item) => item.value === text)
+    column.render = function (h, text, record, index) {
+      const item = find(options.options, (item) => item.value === text)
       const value = item ? item.text : text
 
       return <span>{ value }</span>

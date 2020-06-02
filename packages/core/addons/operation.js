@@ -1,19 +1,59 @@
 // 操作模块
+import { find } from 'lodash'
 import button from '../components/button'
 
-export default function (operation) {
-  const { items } = operation
-  const actions = []
-
-  if (items.length) {
-    items.forEach(item => {
-      actions.push(button(item))
-    })
+const types = [
+  {
+    name: 'primary',
+    parse: button
+  },
+  {
+    name: 'default',
+    parse: button
+  },
+  {
+    name: 'danger',
+    parse: button
+  },
+  {
+    name: 'ghost',
+    parse: button
+  },
+  {
+    name: 'dashed',
+    parse: button
+  },
+  {
+    name: 'link',
+    parse: button
   }
+]
+
+export {
+  types
+}
+
+export default function (operation = {}) {
+  const { items } = operation
+
+  if (!items || !items.length) {
+    return
+  }
+
+  const actions = []
+  items.forEach(item => {
+    const parser = find(types, { name: item.type })
+
+    if (!parser) {
+      throw new Error(`operation addon has not ${item.type} parser`)
+    }
+
+    actions.push(parser.parse(item))
+  })
 
   const render = function (h) {
     const childrens = actions.map(children => {
-      return children._customRender.call(this, h)
+      return children.render.call(this, h)
     })
 
     return h('div', {

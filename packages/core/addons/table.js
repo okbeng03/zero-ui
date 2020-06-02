@@ -1,11 +1,10 @@
 // 表格模块
-// import compiler from 'vue-template-compiler'
 import Vue from 'vue'
-import parser from '../definition'
+import columnsParse from '../definition'
 import defaultConfig from '../config'
 
 export default function (table, schema, schemaPathMap) {
-  const columns = parser(table.columns, schemaPathMap)
+  const columns = columnsParse(table.columns, schemaPathMap)
   const config = {
     ...table,
     columns,
@@ -20,18 +19,9 @@ export default function (table, schema, schemaPathMap) {
     if (!config.ready) {
       // Table columns parse
       config.columns = config.columns.map(column => {
-        if (column._customRender) {
+        if (column.render) {
           column.customRender = (text, record, index) => {
-            return column._customRender.call(this, this.$createElement, text, record, index)
-          }
-        }
-
-        if (column.template) {
-          column.customRender = (text, record, index) => {
-            const template = column.template(text, record, index)
-            const render = Vue.compile(template)
-
-            return render.render.call(this, text, record, index)
+            return column.render.call(this, this.$createElement, text, record, index)
           }
         }
 

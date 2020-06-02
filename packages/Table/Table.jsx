@@ -1,5 +1,5 @@
 import generate from '../core'
-import { addons } from '../core/addons'
+import addons from '../core/addons'
 
 export default {
   name: 'ZeroTable',
@@ -32,9 +32,11 @@ export default {
     const { dsl } = this
     const childrends = []
 
-    addons.forEach(addonKey => {
-      const addon = dsl[addonKey].render.call(this, h)
-      childrends.push(addon)
+    addons.forEach(({ name }) => {
+      if (dsl[name]) {
+        const addon = dsl[name].render.call(this, h)
+        childrends.push(addon)
+      }
     })
 
     return h('div', {

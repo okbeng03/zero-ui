@@ -2,7 +2,7 @@ export default function (options) {
   const { type = 'default', action, confirm, text } = options
   const children = text
 
-  const customRender = function (h, text, record, index) {
+  const render = function (h, text, record, index) {
     const props = {
       type
     }
@@ -39,6 +39,6 @@ export default function (options) {
   }
 
   return {
-    _customRender: customRender
+    render
   }
 }

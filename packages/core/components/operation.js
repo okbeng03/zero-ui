@@ -11,9 +11,9 @@ export default function (key, schema, parentSchema, definition = {}, options = {
     })
   }
 
-  const customRender = function (h, text, record, index) {
+  const render = function (h, text, record, index) {
     const childrens = actions.map(children => {
-      return children._customRender.call(this, h, text, record, index)
+      return children.render.call(this, h, text, record, index)
     })
 
     return h('div', {
@@ -24,6 +24,6 @@ export default function (key, schema, parentSchema, definition = {}, options = {
   }
 
   return {
-    _customRender: customRender
+    render
   }
 }

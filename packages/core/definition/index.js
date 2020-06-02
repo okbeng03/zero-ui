@@ -1,5 +1,7 @@
+import Vue from 'vue'
+import { find } from 'lodash'
 import ObjectPath from 'objectpath'
-import schemaParser from '../schema/index'
+import schemaParser from '../schema'
 import defaultRule from '../schema/rules/default'
 import rules from './rule'
 
@@ -35,23 +37,26 @@ function traverse (definition, schemaPathMap) {
   } else {
     const { type, customRender } = definition
 
+    // 自定义渲染
     if (customRender) {
       column = {}
-      column.template = function (text, record, index) {
+      column.render = function (h, text, record, index) {
         const template = (new Function('text', 'record', 'index', customRender))(text, record, index)
+        template.replace('text', 'arguments[0]').replace('record', 'arguments[1]').replace('index', 'arguments[2]')
+        const render = Vue.compile(template)
 
-        return template.replace('text', 'arguments[0]').replace('record', 'arguments[1]').replace('index', 'arguments[2]')
+        return render.render.call(this, text, record, index)
       }
       delete definition.customRender
     } else {
       if (type) {
-        const parser = rules[type]
+        const parser = find(rules, { name: type })
 
-        if (parser) {
-          column = parser(key, schema, parentSchema, definition, definition.options || {})
-        } else {
-          column = {}
+        if (!parser) {
+          throw new Error(`defintion types has not ${type} parser`)
         }
+
+        column = parser.parse(key, schema, parentSchema, definition, definition.options || {})
       } else {
         column = schemaParser(key, schema, parentSchema, definition)
       }
@@ -60,6 +65,10 @@ function traverse (definition, schemaPathMap) {
 
   // 合并
   return Object.assign({}, defaultColumn, column, definition === key ? {} : definition)
+}
+
+export {
+  rules
 }
 
 export default parse

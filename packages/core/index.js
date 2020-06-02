@@ -1,6 +1,6 @@
-import schemaPath from './schema/path'
-import actionParser from './action'
-import parser, { addons } from './addons'
+import { schemaPath } from './schema'
+import actionParse from './action'
+import addons from './addons'
 
 function parse (definition, schema) {
   const schemaPathMap = schemaPath(schema)
@@ -8,11 +8,11 @@ function parse (definition, schema) {
   const dsl = {}
 
   if (actions) {
-    dsl.actions = actionParser(actions)
+    dsl.actions = actionParse(actions)
   }
 
-  addons.forEach(addon => {
-    dsl[addon] = parser[addon](definition[addon], schema, schemaPathMap)
+  addons.forEach(({ name, parse }) => {
+    dsl[name] = parse(definition[name], schema, schemaPathMap)
   })
 
   return dsl
