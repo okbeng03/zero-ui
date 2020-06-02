@@ -1,0 +1,78 @@
+{
+  "name": "zero-ui",
+  "version": "0.0.1",
+  "description": "Litter code front-end development component",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "type": "module",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "compile": "node build/cli/run.js compile",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "lib",
+    "es"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okbeng03/zero-ui.git"
+  },
+  "keywords": [
+    "vue",
+    "json-schema",
+    "form",
+    "datagrid"
+  ],
+  "author": "okbeng03",
+  "license": "ISC",
+  "dependencies": {
+    "core-js": "^3.6.4",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.3.0",
+    "@vue/cli-plugin-eslint": "^4.3.0",
+    "@vue/cli-service": "^4.3.0",
+    "@vue/eslint-config-standard": "^5.1.2",
+    "ajv": "^6.12.2",
+    "ajv-errors": "^1.0.1",
+    "ant-design-vue": "^1.5.3",
+    "autoprefixer": "^9.8.0",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "babel-plugin-import": "^1.13.0",
+    "babel-plugin-inline-import-data-uri": "^1.0.1",
+    "babel-plugin-istanbul": "^6.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
+    "babel-plugin-transform-es3-property-literals": "^6.22.0",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-strip-code": "^0.1.4",
+    "json-schema-traverse": "^0.4.1",
+    "less": "3.9.0",
+    "less-loader": "4.1.0",
+    "less-plugin-npm-import": "^2.1.0",
+    "lodash": "^4.17.15",
+    "merge2": "^1.3.0",
+    "mockjs": "^1.1.0",
+    "objectpath": "^2.0.0",
+    "postcss": "^7.0.30",
+    "rimraf": "^3.0.2",
+    "rucksack-css": "^1.0.2",
+    "through2": "^3.0.1",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
