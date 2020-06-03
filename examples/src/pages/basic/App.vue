@@ -4,76 +4,17 @@
       row-key="id"
       :definition="definition"
       :schema="schema"
-      :data-source="data"
     >
     </zero-table>
-
-    <!-- <a-table
-      row-key="id"
-      :columns="columns"
-      :data-source="data"
-    >
-      <a-button slot="action" slot-scope="text, record, index" @click="() => onEdit(record, index)">修改</a-button>
-    </a-table> -->
   </div>
 </template>
 
 <script>
-import Mock from 'mockjs'
-
-// const columns = [
-//   {
-//     dataIndex: 'id',
-//     title: '序号'
-//   },
-//   {
-//     dataIndex: 'sellerCode',
-//     title: '销售商编码'
-//   },
-//   {
-//     dataIndex: 'sellerType',
-//     title: '销售商类别'
-//   },
-//   {
-//     dataIndex: 'descp',
-//     title: '类别说明'
-//   },
-//   {
-//     dataIndex: 'status',
-//     title: '状态'
-//   },
-//   {
-//     dataIndex: 'supplierCode',
-//     title: '供应商编码'
-//   },
-//   {
-//     dataIndex: 'createTime',
-//     title: '创建时间'
-//   }
-// ]
-const data = Mock.mock({
-  'list|10-50': [
-    {
-      'id|+1': 1,
-      sellerCode: function () {
-        return ['FU', 'JD', '8L'][Math.floor(Math.random() * 3)]
-      },
-      descp: '12',
-      sellerType: 'A',
-      status: function () {
-        return ['INACTIVE', 'ACTIVE'][Math.round(Math.random())]
-      },
-      supplierCode: 'FU',
-      logo: '@image',
-      createTime: '@DateTime'
-    }
-  ]
-}).list
+import './mock'
 
 export default {
   data () {
     return {
-      data,
       definition: {
         table: {
           rowKey: 'id',
@@ -185,6 +126,9 @@ export default {
             }
           ]
         },
+        search: {
+          api: '/api/mock'
+        },
         actions: {
           onAdd: `
             this.dataSource.splice(0, 0, {
@@ -276,42 +220,6 @@ export default {
           'createTime'
         ]
       }
-      // columns: [
-      //   {
-      //     title: '序号',
-      //     dataIndex: 'id'
-      //   },
-      //   {
-      //     title: '销售商编码',
-      //     dataIndex: 'sellerCode'
-      //   },
-      //   {
-      //     title: '销售商类别',
-      //     dataIndex: 'sellerType'
-      //   },
-      //   {
-      //     title: '类别说明',
-      //     dataIndex: 'descp'
-      //   },
-      //   {
-      //     title: '状态',
-      //     dataIndex: 'status'
-      //   },
-      //   {
-      //     title: '供应商编码',
-      //     dataIndex: 'supplierCode'
-      //   },
-      //   {
-      //     title: '创建时间',
-      //     dataIndex: 'createTime',
-      //     customRender: this.test
-      //   },
-      //   {
-      //     title: '操作',
-      //     dataIndex: 'action',
-      //     scopedSlots: { customRender: 'action' }
-      //   }
-      // ]
     }
   }
 }
