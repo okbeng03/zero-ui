@@ -64,7 +64,9 @@ export default function (operation = {}) {
   }
 
   return {
-    actions,
+    config: {
+      actions
+    },
     render
   }
 }

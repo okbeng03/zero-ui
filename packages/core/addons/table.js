@@ -11,10 +11,11 @@ export default function (table, schema, schemaPathMap) {
     ready: false
   }
 
-  Object.assign(config, defaultConfig)
+  Object.assign(config, defaultConfig.table)
 
   const render = function (h) {
     const { dataSource } = this
+    const { config } = this.dsl.table
 
     if (!config.ready) {
       // Table columns parse
@@ -63,7 +64,7 @@ export default function (table, schema, schemaPathMap) {
   }
 
   return {
-    ...config,
+    config,
     render
   }
 }

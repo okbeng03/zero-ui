@@ -10,7 +10,12 @@ export default {
     pagination: {
       current: 1,
       pageSize: 10,
+      total: 0,
       size: 'default'
-    }
+    },
+    loading: false
+  },
+  search: {
+    method: 'post'
   }
 }
