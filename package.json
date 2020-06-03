@@ -27,8 +27,7 @@
   "author": "okbeng03",
   "license": "ISC",
   "dependencies": {
-    "core-js": "^3.6.4",
-    "vue-template-compiler": "^2.6.11"
+    "core-js": "^3.6.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.3.0",
@@ -53,6 +52,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "babel-preset-env": "^1.7.0",
+    "colorful": "^2.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",

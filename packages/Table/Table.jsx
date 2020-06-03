@@ -1,6 +1,6 @@
 import axios from 'axios'
-import generate from '../core'
-import addons from '../core/addons'
+import generate from './core'
+import addons from './core/addons'
 
 export default {
   name: 'ZeroTable',
