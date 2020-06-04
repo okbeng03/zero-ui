@@ -91,6 +91,7 @@ function compile(modules) {
       }),
     )
     .pipe(gulp.dest(modules === false ? esDir : libDir))
+
   const assets = gulp
     .src(['packages/**/*.@(png|svg)'])
     .pipe(gulp.dest(modules === false ? esDir : libDir))
