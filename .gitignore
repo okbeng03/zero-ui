@@ -19,3 +19,16 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# dotenv environment variables file
+.vscode
+.env
+.idea
+.DS_Store
+dist
+lib
+es
+_site
+yarn.lock
+package-lock.json
+/coverage
