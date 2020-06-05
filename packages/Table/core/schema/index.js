@@ -1,10 +1,8 @@
 import { find } from 'lodash'
-import schemaPath from './path'
 import rules from './rule.js'
 
 export {
-  rules,
-  schemaPath
+  rules
 }
 
 export default function (key, schema, parentSchema, definition = {}) {

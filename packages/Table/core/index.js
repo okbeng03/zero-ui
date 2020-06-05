@@ -1,4 +1,4 @@
-import { schemaPath } from './schema'
+import schemaPath from '../../util/schemaPath'
 import actionParse from './action'
 import addons from './addons'
 
