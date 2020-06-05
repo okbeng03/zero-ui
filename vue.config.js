@@ -1,7 +1,7 @@
 const util = require('./examples/build/util')
 
 module.exports = {
-  pages: util.getEntries('./examples/src/pages/*/*.js'),
+  pages: util.getEntries('./examples/src/pages/*/index.js'),
   filenameHashing: true,
   css: {
     loaderOptions: {
