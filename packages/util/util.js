@@ -19,13 +19,10 @@ const parseErrors = function (errors) {
   return map
 }
 
-const undef = undefined
-
 const removeEmptyValue = function (model) {
   const isArr = isArray(model)
 
   forEach(model, (value, key) => {
-    console.log(4444, value, key)
     if (isNil(value) || (isString(value) && !value)) {
       isArr ? model.splice(key, 1) : delete model[key]
       return
