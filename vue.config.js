@@ -18,5 +18,6 @@ module.exports = {
     config.resolve.alias
       .set('@', process.cwd())
       .set('vue$', 'vue/dist/vue.esm.js')
-  }
+  },
+  lintOnSave: false
 }
