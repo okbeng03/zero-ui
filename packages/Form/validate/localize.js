@@ -12,7 +12,7 @@ export default function localize (errors = [], schema) {
     let n
     let cond
     let path = e.dataPath
-    console.log(e)
+
     if (e.keyword === 'required') {
       path += '.' + e.params.missingProperty
     }

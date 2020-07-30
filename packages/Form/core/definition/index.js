@@ -3,6 +3,7 @@ import ObjectPath from 'objectpath'
 import extend from 'extend'
 import defaultRule from '../schema/rules/default'
 import schemaParser from '../schema'
+import definitionParser from './parse'
 
 function parse (definition, schemaPathMap, root) {
   const schemaPathMapKeys = Object.keys(schemaPathMap)
@@ -18,39 +19,14 @@ function parse (definition, schemaPathMap, root) {
 
   // 解析规则
   const _definition = parseRule(dsl, schemaPathMap, root, definition)
-  console.log(cloneDeep(_definition))
 
   return _definition
-}
-
-const regArrayKeyword = /\[\]/g
-
-// 兼容以前 definition.key 数组用 `[]` 定义
-function parseDefinition (items) {
-  return items.map(item => {
-    if (typeof item === 'string') {
-      return {
-        key: item.replace(regArrayKeyword, '[0]')
-      }
-    } else {
-      const newItem = {
-        ...item,
-        key: item.key.replace(regArrayKeyword, '[0]')
-      }
-
-      if (item.items) {
-        newItem.items = parseDefinition(item.items)
-      }
-
-      return newItem
-    }
-  })
 }
 
 // 生成渲染数据结构
 function parseRule (dsl, schemaPathMap, root, definition) {
   const def = dsl[0]
-  const key = typeof def === 'string' ? def : def.key
+  const key = def.key
   const keyArray = ObjectPath.parse(key)
   keyArray.splice(-1, 1)
   const parentSchema = keyArray.length
@@ -65,8 +41,7 @@ function parseRule (dsl, schemaPathMap, root, definition) {
 const baseTypes = ['boolean', 'number', 'string', 'integer', 'object', 'array']
 
 function traverse (def, schemaPathMap, parentSchema, definition) {
-  const isStr = typeof def === 'string'
-  const key = isStr ? def : def.key
+  const key = def.key
   const schema = schemaPathMap[key]
   let config
 
@@ -74,17 +49,19 @@ function traverse (def, schemaPathMap, parentSchema, definition) {
   const defaults = defaultRule(key, schema, parentSchema, definition)
 
   // definition 未指定type or type 为基础类型，走 schema 基础规则解析
-  if (isStr || !def.type || baseTypes.indexOf(def.type)) {
+  if (!def.type || baseTypes.indexOf(def.type) > -1) {
     config = schemaParser(schema, parentSchema, def, defaults)
   } else {
-
+    config = definitionParser(def, schema, parentSchema)
   }
 
   if (def.items) {
     config.items = parseRule(def.items, schemaPathMap, parentSchema, definition)
   }
 
-  return extend(true, {}, config, defaults)
+  delete def.type
+
+  return extend(true, {}, defaults, config, def)
 }
 
 // 扁平结构组装成嵌套结构
@@ -158,6 +135,34 @@ function generate (exitItems, schemaPathMap) {
   })
 
   return items
+}
+
+const regArrayKeyword = /\[\]/g
+
+// 兼容以前 definition.key 数组用 `[]` 定义
+function parseDefinition (items) {
+  return items.map(item => {
+    if (typeof item === 'string') {
+      return {
+        key: item.replace(regArrayKeyword, '[0]')
+      }
+    } else {
+      if (!item.key) {
+        return item
+      }
+
+      const newItem = {
+        ...item,
+        key: item.key.replace(regArrayKeyword, '[0]')
+      }
+
+      if (item.items) {
+        newItem.items = parseDefinition(item.items)
+      }
+
+      return newItem
+    }
+  })
 }
 
 export default parse

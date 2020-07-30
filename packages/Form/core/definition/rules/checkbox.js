@@ -1,5 +1,6 @@
 export default function () {
   return {
-    type = 'zero-html'
+    type: 'zero-checkbox',
+    decorator: {}
   }
 }

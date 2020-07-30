@@ -1,6 +1,6 @@
 export default function () {
   return {
-    type = 'zero-checkbox',
+    type: 'a-textarea',
     decorator: {}
   }
 }

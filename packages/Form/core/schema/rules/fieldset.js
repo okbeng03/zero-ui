@@ -1,6 +1,3 @@
-import { size, each } from 'lodash'
-import inlineParse from './inline'
-
 export default function (schema) {
   const type = schema.type
 

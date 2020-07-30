@@ -15,7 +15,7 @@ export default function (schema) {
 
       if (len <= 6) {
         flag = true
-        each(childSchema.properties, (val, key) => {
+        each(childSchema.properties, val => {
           if (val.type === 'object' || val.type === 'array') {
             flag = false
             return false

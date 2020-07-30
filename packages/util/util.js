@@ -1,3 +1,5 @@
+import { isArray, forEach, isString, isNil } from 'lodash'
+
 const enumToOptions = function (enums) {
   return enums.map(item => {
     return {
@@ -20,17 +22,18 @@ const parseErrors = function (errors) {
 const undef = undefined
 
 const removeEmptyValue = function (model) {
-  const isArray = _.isArray(model)
+  const isArr = isArray(model)
 
-  _.forEach(model, (value, key) => {
-    if ((_.isString(value) && !value)) {
-      isArray ? model.splice(key, 1, undef) : model[key] = undef
+  forEach(model, (value, key) => {
+    console.log(4444, value, key)
+    if (isNil(value) || (isString(value) && !value)) {
+      isArr ? model.splice(key, 1) : delete model[key]
       return
     }
 
     if (_.isObject(value)) {
       if (_.isEmpty(value)) {
-        model[key] = undef
+        delete model[key]
       } else {
         removeEmptyValue(value)
       }
