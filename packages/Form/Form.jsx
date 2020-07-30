@@ -86,7 +86,8 @@ export default {
 
       this.form.validateFields((errors, values) => {
         if (!errors) {
-          console.log(values)
+          removeEmptyValue(values)
+          console.log('submit', values)
           this.$emit('submit', values)
         }
       })
@@ -103,7 +104,6 @@ export default {
       let error
 
       if (!valid) {
-        console.log(11111, validate.errors, model)
         localize(validate.errors, schema)
         const allErrors = parseErrors(validate.errors)
 
