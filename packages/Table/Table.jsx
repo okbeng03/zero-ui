@@ -58,7 +58,7 @@ export default {
 
     return h('div', {
       attrs: {
-        class: 'zero-table-page'
+        class: 'zero-table-module'
       }
     }, childrends)
   },
@@ -116,6 +116,9 @@ export default {
     },
     onSearch (pagination, filters, sorter, data) {
       const { table } = this.dsl
+
+      // TODO: filter、sorter时分页设为1
+
       table.config.pagination = {
         ...table.config.pagination,
         ...pagination
