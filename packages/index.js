@@ -1,7 +1,9 @@
 import Table, { rules as tableRules } from './Table'
+import Form from './Form'
 
 const components = [
-  Table
+  Table,
+  Form
 ]
 
 const install = function (Vue) {

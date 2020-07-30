@@ -1,0 +1,63 @@
+.zero-list {
+  padding: 16px;
+  border: 1px dashed #d9d9d9;
+
+  .zero-list-header,
+  .zero-list-footer,
+  .zero-list-item {
+    padding-right: 24px;
+  }
+
+  .zero-list-item {
+    position: relative;
+    margin-top: 10px;
+    border-bottom: 1px dashed #f0f0f0;
+
+    > .zero-fieldset {
+      padding: 0;
+      border: 0 none;
+    }
+
+    > .ant-row > div {
+      padding-right: 24px;
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    .btn-delete {
+      position: absolute;
+      right: 0;
+      top: 4px;
+      font-size: 20px;
+      color: #999;
+      cursor: pointer;
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+
+  .zero-list-header {
+    > div {
+      padding-right: 24px;
+
+      label {
+        display: block;
+        padding: 0 11px;
+        line-height: 32px;
+        background-color: #f0f0f0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+
+  .zero-list-footer {
+    margin-top: 10px;
+  }
+}
