@@ -4,6 +4,7 @@
       :definition="definition"
       :schema="schema"
       :default-value="model"
+      @submit="onSubmit"
     >
     </zero-form>
   </div>
@@ -24,6 +25,7 @@ export default {
               type: 'a-slider',
               decorator: {}
             },
+            'workYear',
             'single',
             {
               key: 'sex',
@@ -66,6 +68,10 @@ export default {
             title: '年龄',
             minimum: 1,
             maximum: 120
+          },
+          workYear: {
+            type: 'number',
+            title: '工作年限'
           },
           single: {
             type: 'boolean',
@@ -117,6 +123,11 @@ export default {
         other: '111',
         birthday: '2020-07-30 12:00:00'
       }
+    }
+  },
+  methods: {
+    onSubmit (values) {
+      console.log('submit', values)
     }
   }
 }
