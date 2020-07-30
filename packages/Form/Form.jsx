@@ -84,6 +84,7 @@ export default {
 
       this.form.validateFields((errors, values) => {
         if (!errors) {
+          // 移除空数据
           removeEmptyValue(values)
           this.$emit('submit', values)
         }

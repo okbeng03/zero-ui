@@ -6,7 +6,16 @@ export default function (schema) {
   if (type === 'array') {
     const childSchema = schema.items
     const definition = {
-      type: 'zero-list'
+      type: 'zero-list',
+      input: {}
+    }
+
+    if (schema.minItems) {
+      definition.input.minItems = schema.minItems
+    }
+
+    if (schema.maxItems) {
+      definition.input.maxItems = schema.maxItems
     }
 
     if (childSchema.type === 'object') {

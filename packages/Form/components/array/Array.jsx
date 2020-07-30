@@ -142,10 +142,24 @@ const List = {
       )
     },
     add () {
+      const { maxItems } = this.definition.input || {}
+
+      if (this.size === maxItems) {
+        this.$message.error(`数组最大元素为${maxItems}`)
+        return
+      }
+
       this.list.push(this.size)
       this.size += 1
     },
     remove (idx) {
+      const { minItems } = this.definition.input || {}
+
+      if (this.size === minItems) {
+        this.$message.error(`数组最小元素为${minItems}`)
+        return
+      }
+
       const { id } = this
       const value = this.form.getFieldValue(id)
       value.splice(idx, 1)

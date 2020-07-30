@@ -17,8 +17,7 @@ export default {
         form: {
           items: [
             {
-              key: 'name',
-              lazy: false
+              key: 'name'
             },
             {
               key: 'age',
@@ -59,14 +58,14 @@ export default {
         properties: {
           name: {
             type: 'string',
-            title: '姓名'
+            title: '姓名',
+            maxLength: 4
           },
           age: {
             type: 'number',
             title: '年龄',
             minimum: 1,
-            maximum: 120,
-            default: 25
+            maximum: 120
           },
           single: {
             type: 'boolean',
@@ -100,6 +99,7 @@ export default {
           group: {
             title: '分组',
             type: 'array',
+            maxItems: 2,
             items: {
               type: 'string',
               title: '爱好'
