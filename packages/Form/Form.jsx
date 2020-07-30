@@ -51,8 +51,6 @@ export default {
     }, {
       deep: true
     })
-
-    console.log(this.dsl)
   },
   mounted () {
     const { defaultValue } = this
@@ -87,7 +85,6 @@ export default {
       this.form.validateFields((errors, values) => {
         if (!errors) {
           removeEmptyValue(values)
-          console.log('submit', values)
           this.$emit('submit', values)
         }
       })
