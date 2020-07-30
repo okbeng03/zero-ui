@@ -27,7 +27,9 @@
   "author": "okbeng03",
   "license": "ISC",
   "dependencies": {
-    "core-js": "^3.6.4"
+    "core-js": "^3.6.4",
+    "extend": "^3.0.2",
+    "vuedraggable": "^2.24.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.3.0",
