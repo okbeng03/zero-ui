@@ -12,6 +12,9 @@ export default {
       offset: 0
     },
     colon: true,
-    hideReset: false
+    hideReset: false,
+    validate: true,
+    okText: '提交',
+    cancelText: '重置'
   }
 }
