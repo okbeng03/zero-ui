@@ -1,5 +1,6 @@
 import { Table, Button, Popconfirm, message } from 'ant-design-vue'
 import ZTable from './Table'
+import ZForm from '../Form'
 import addons from './core/addons'
 import { types as operationAddonRules } from './core/addons/operation'
 import { rules as definitionRules } from './core/definition'
@@ -22,6 +23,7 @@ ZTable.install = function (Vue) {
   Vue.use(Table)
   Vue.use(Button)
   Vue.use(Popconfirm)
+  Vue.use(ZForm)
   Vue.prototype.$message = message
   Vue.component(ZTable.name, ZTable)
 }

@@ -16,6 +16,14 @@ export default {
     loading: false
   },
   search: {
-    method: 'post'
+    method: 'post',
+    form: {
+      layout: 'inline',
+      labelAlign: 'right',
+      okText: '查询',
+      validate: false,
+      hideRequiredMark: true
+    },
+    params: {}
   }
 }

@@ -1,17 +1,16 @@
 // 表格模块
 import Vue from 'vue'
+import extend from 'extend'
 import columnsParse from '../definition'
 import defaultConfig from '../config'
 
 export default function (table, schema, schemaPathMap) {
   const columns = columnsParse(table.columns, schemaPathMap)
-  const config = {
+  const config = extend(true, {}, defaultConfig.table, {
     ...table,
     columns,
     ready: false
-  }
-
-  Object.assign(config, defaultConfig.table)
+  })
 
   const render = function (h) {
     const { dataSource } = this
@@ -58,7 +57,7 @@ export default function (table, schema, schemaPathMap) {
         ...config
       },
       on: {
-        change: this.onSearch
+        change: this.onChange
       }
     })
   }

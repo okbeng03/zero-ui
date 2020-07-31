@@ -30,11 +30,11 @@ export default {
               options: {
                 options: [
                   {
-                    text: '福州航空',
+                    label: '福州航空',
                     value: 'FU'
                   },
                   {
-                    text: '祥鹏航空',
+                    label: '祥鹏航空',
                     value: '8L'
                   }
                 ]
@@ -127,7 +127,33 @@ export default {
           ]
         },
         search: {
-          api: '/api/mock'
+          api: '/api/mock',
+          form: {
+            items: [
+              {
+                key: 'sellerCode',
+                input: {
+                  options: [
+                    {
+                      label: '福州航空',
+                      value: 'FU'
+                    },
+                    {
+                      label: '祥鹏航空',
+                      value: '8L'
+                    }
+                  ]
+                }
+              },
+              'sellerType',
+              'status',
+              'createTime',
+              'supplierCode'
+            ]
+          },
+          params: {
+            sellerCode: '8L'
+          }
         },
         actions: {
           onAdd: `
@@ -167,7 +193,6 @@ export default {
         }
       },
       schema: {
-        $schema: 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         properties: {
           id: {
@@ -177,10 +202,10 @@ export default {
           sellerCode: {
             type: 'string',
             title: '销售商编码',
-            enums: [
-              'FU',
-              'JD',
-              '8L'
+            enum: [
+              'FU',              
+              '8L',
+              'JD'
             ]
           },
           sellerType: {

@@ -8,7 +8,7 @@ const momentFormatMap = {
 }
 
 export default function (key, schema, parentSchema, definition = {}, options = {}) {
-  const { format, enums } = schema
+  const { format } = schema
   const column = {}
 
   if (format) {
@@ -52,10 +52,10 @@ export default function (key, schema, parentSchema, definition = {}, options = {
     }
   }
 
-  if (enums && options.options) {
+  if (schema.enum && options.options) {
     column.render = function (h, text, record, index) {
       const item = find(options.options, (item) => item.value === text)
-      const value = item ? item.text : text
+      const value = item ? item.label : text
 
       return <span>{ value }</span>
     }

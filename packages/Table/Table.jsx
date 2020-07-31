@@ -14,6 +14,7 @@ export default {
       selectedRowKeys: [],
       filters: {},
       sorter: {},
+      params: {},
       dataSource: []
     }
   },
@@ -40,6 +41,7 @@ export default {
     }
 
     this.dsl = dsl
+    this.params = dsl.search.config.params
   },
   mounted () {
     this.fetch()
@@ -64,7 +66,7 @@ export default {
   },
   methods: {
     fetch () {
-      const { pagination, filters, sorter } = this
+      const { pagination, filters, sorter, params } = this
       const { search, table } = this.dsl
       let key
 
@@ -86,18 +88,19 @@ export default {
         sorterParam[sorter.field] = sorter.order
       }
 
-      const params = {
+      const searchParam = {
         ...pagination,
         filters: filtersParam,
-        sorter: sorterParam
+        sorter: sorterParam,
+        search: params
       }
-
+      console.log(searchParam)
       table.config.loading = true
 
       axios({
         method: search.config.method,
         url: search.config.api,
-        data: params
+        data: searchParam
       }).then(({ status, data, message }) => {
         if (status === 200) {
           const { list = [], total } = data
@@ -114,15 +117,13 @@ export default {
         table.config.loading = false
       })
     },
-    onSearch (pagination, filters, sorter, data) {
-      const { table } = this.dsl
-
-      // TODO: filter、sorter时分页设为1
-
-      table.config.pagination = {
-        ...table.config.pagination,
+    onChange (pagination, filters, sorter) {
+      const { config } = this.dsl.table
+      config.pagination = {
+        ...config.pagination,
         ...pagination
       }
+
       this.filters = filters
       this.sorter = sorter
 
@@ -130,7 +131,17 @@ export default {
         this.fetch()
       })
     },
-    onSelect (selectedRowKeys, selectedRows) {
+    onSearch (values) {
+      const { config } = this.dsl.table
+      this.params = values
+      config.pagination = {
+        ...config.pagination,
+        current: 1
+      }
+
+      this.fetch()
+    },
+    onSelect (selectedRowKeys) {
       this.selectedRowKeys = selectedRowKeys
     }
   }

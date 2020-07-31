@@ -1,5 +1,47 @@
-.zero-operations {
+.zero-table-module {
   padding: 16px;
+}
+
+.zero-table-search {
+  margin-bottom: 16px;
+  padding: 8px 0;
+
+  .zero-fieldset {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .ant-form-item {
+      display: flex;
+      flex-direction: row;
+      margin-right: 0;
+      width: 32%;
+    }
+
+    .ant-form-item-label {
+      width: 30%;
+    }
+
+    .ant-form-item-control-wrapper {
+      flex: 1;
+    }
+
+    .ant-calendar-picker {
+      width: 100%;
+    }
+  }
+
+  .ant-form {
+    > .ant-row {
+      display: block;
+      text-align: right;
+    }
+  }
+}
+
+.zero-operations {
+  margin-bottom: 16px;
 
   .zero-button {
     margin-right: 8px;
@@ -12,6 +54,19 @@
 
     .zero-button {
       margin-left: 8px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .zero-table-search {
+    .zero-fieldset {
+      .ant-form-item {
+        display: flex;
+        flex-direction: row;
+        margin-right: 0;
+        width: 24%;
+      }
     }
   }
 }
