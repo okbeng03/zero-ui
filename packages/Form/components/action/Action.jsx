@@ -5,7 +5,7 @@ const Action = {
     form: Object
   },
   render (h) {
-    const { wrapperCol, labelCol, hideReset } = this.config
+    const { wrapperCol, labelCol, hideReset, okText, cancelText } = this.config
     const actionWrapperCol = wrapperCol ? {
       span: wrapperCol.span,
       offset: labelCol.span + labelCol.offset
@@ -15,13 +15,13 @@ const Action = {
         title="确认重置？"
         onConfirm={ () => this.handleClear() }
       >
-        <a-button type="danger" style="margin-left: 16px;">重置</a-button>
+        <a-button type="danger" style="margin-left: 16px;">{ cancelText }</a-button>
       </a-popconfirm>
     )
 
     return (
       <a-form-item wrapperCol={ actionWrapperCol }>
-        <a-button type="primary" html-type="submit">提交</a-button>
+        <a-button type="primary" html-type="submit">{ okText }</a-button>
         { resetBtn }
       </a-form-item>
     )
