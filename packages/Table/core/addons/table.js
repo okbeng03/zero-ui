@@ -40,10 +40,7 @@ export default function (table, schema, schemaPathMap) {
           const template = config.expandedRowRender
 
           config.expandedRowRender = (record, index, indent, expended) => {
-            const _template = (new Function('record', 'index', 'indent', 'expended', template))(record, index, indent, expended)
-            const render = Vue.compile(_template)
-
-            return render.render.call(this)
+            return (new Function('h', 'record', 'index', 'indent', 'expended', template)).call(this, this.$createElement, record, index, indent, expended)
           }
         }
       }
