@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { find } from 'lodash'
+import { find, isFunction } from 'lodash'
 import ObjectPath from 'objectpath'
 import schemaParser from '../schema'
 import defaultRule from '../schema/rules/default'
@@ -40,12 +40,12 @@ function traverse (definition, schemaPathMap) {
     // 自定义渲染
     if (customRender) {
       column = {}
-      column.render = function (h, text, record, index) {
-        const template = (new Function('text', 'record', 'index', customRender))(text, record, index)
+      column.render = isFunction(customRender) ? customRender : function (h, text, record, index) {
+        const template = (new Function('h', 'text', 'record', 'index', customRender))(h, text, record, index)
         template.replace('text', 'arguments[0]').replace('record', 'arguments[1]').replace('index', 'arguments[2]')
         const render = Vue.compile(template)
 
-        return render.render.call(this, text, record, index)
+        return render.render.call(this, h, text, record, index)
       }
       delete definition.customRender
     } else {

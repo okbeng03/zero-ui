@@ -36,7 +36,8 @@ export default {
     // methods parse
     if (actions) {
       for (const key in actions) {
-        this[key] = actions[key]
+        // bind只能改变普通函数的this指向；箭头函数和methods里的函数没法改变，这时候使用refs
+        this[key] = actions[key].bind(this)
       }
     }
 

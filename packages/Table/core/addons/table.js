@@ -1,6 +1,7 @@
 // 表格模块
 import Vue from 'vue'
 import extend from 'extend'
+import { isFunction } from 'lodash'
 import columnsParse from '../definition'
 import defaultConfig from '../config'
 
@@ -35,13 +36,15 @@ export default function (table, schema, schemaPathMap) {
 
       // Table expand row render parse
       if (config.expandedRowRender) {
-        const template = table.expandedRowRender
+        if (!isFunction(config.expandedRowRender)) {
+          const template = config.expandedRowRender
 
-        config.expandedRowRender = (record, index, indent, expended) => {
-          const _template = (new Function('record', 'index', 'indent', 'expended', template))(record, index, indent, expended)
-          const render = Vue.compile(_template)
+          config.expandedRowRender = (record, index, indent, expended) => {
+            const _template = (new Function('record', 'index', 'indent', 'expended', template))(record, index, indent, expended)
+            const render = Vue.compile(_template)
 
-          return render.render.call(this)
+            return render.render.call(this)
+          }
         }
       }
 

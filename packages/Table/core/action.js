@@ -1,3 +1,5 @@
+import { isFunction } from 'lodash'
+
 export default function (actions) {
   const actionsFun = {}
 
@@ -6,7 +8,7 @@ export default function (actions) {
   for (const key in actions) {
     const action = actions[key]
 
-    actionsFun[key] = new Function('$event', 'text', 'record', 'index', action)
+    actionsFun[key] = isFunction(action) ? action : new Function('$event', 'text', 'record', 'index', action)
   }
 
   return actionsFun

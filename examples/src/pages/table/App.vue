@@ -1,7 +1,7 @@
 <template>
   <div>
     <zero-table
-      row-key="id"
+      ref="zTable"
       :definition="definition"
       :schema="schema"
     >
@@ -60,7 +60,14 @@ export default {
               customRender: 'text += "aaa"; return `<i>${text}</i>`'
             },
             'status',
-            'supplierCode',
+            {
+              key: 'supplierCode',
+              customRender: (h, text, record) => {
+                return (
+                  <div>{ text } - { record.descp }</div>
+                )
+              }
+            },
             {
               key: 'logo',
               options: {
@@ -107,7 +114,12 @@ export default {
               // customRender: 'return `<a-button @click="() => addTodo(record, index)">修改</a-button>`'
             }
           ],
-          expandedRowRender: 'const text = record.descp + "aaa"; return `<p>${text}</p>`'
+          // expandedRowRender: 'const text = record.descp + "aaa"; return `<p>${text}</p>`'
+          expandedRowRender: (record) => {
+            return (
+              <p>{ record.descp + 'aaa' }</p>
+            )
+          }
         },
         operation: {
           items: [
@@ -156,7 +168,18 @@ export default {
           }
         },
         actions: {
-          onAdd: `
+          // onAdd: `
+          //   this.dataSource.splice(0, 0, {
+          //     id: 9999,
+          //     sellerCode: 'FU',
+          //     sellerType: 'C',
+          //     supplierCode: 'FU',
+          //     status: 'INACTIVE',
+          //     descp: 'test',
+          //     createTime: '2020-06-01 10:00:00'
+          //   })
+          // `,
+          onAdd: function () {
             this.dataSource.splice(0, 0, {
               id: 9999,
               sellerCode: 'FU',
@@ -166,7 +189,7 @@ export default {
               descp: 'test',
               createTime: '2020-06-01 10:00:00'
             })
-          `,
+          },
           onBatchDelete: `
             const { selectedRowKeys } = this
 
@@ -175,21 +198,25 @@ export default {
               return
             }
 
-            console.log(selectedRowKeys, $event)
+            console.log('batch delete', selectedRowKeys, $event)
           `,
-          onDetail: `
-            console.log(111, $event)
-          `,
+          // onDetail: `
+          //   console.log(111, $event)
+          // `,
+          onDetail: function (e, text, record, index) {
+            console.log('detail', e, text, record, index)
+          },
           onEdit: `
-            console.log(222, record, index)
+            console.log('edit', record, index)
             this.dataSource.splice(index, 1, {
               ...record,
               sellerType: 'B'
             })
           `,
-          onDelete: `
-            this.dataSource.splice(index, 1)
-          `
+          // onDelete: `
+          //   this.dataSource.splice(index, 1)
+          // `,
+          onDelete: this.onDelete
         }
       },
       schema: {
@@ -245,6 +272,12 @@ export default {
           'createTime'
         ]
       }
+    }
+  },
+  methods: {
+    onDelete: function (e, text, record, index) {
+      console.log(this.$refs.zTable, text, record, index)
+      this.$refs.zTable.dataSource.splice(index, 1)
     }
   }
 }
