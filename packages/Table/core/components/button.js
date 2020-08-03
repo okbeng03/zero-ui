@@ -7,7 +7,7 @@ export default function (options) {
       type
     }
     const attrs = {
-      'zero-button': true
+      class: 'zero-button'
     }
     const _action = ($event) => this[action]($event, text, record, index)
 
@@ -24,13 +24,13 @@ export default function (options) {
       }, [
         h('a-button', {
           props,
-          class: attrs
+          ...attrs,
         }, children)
       ])
     } else {
       return h('a-button', {
         props,
-        class: attrs,
+        ...attrs,
         on: {
           click: _action
         }
