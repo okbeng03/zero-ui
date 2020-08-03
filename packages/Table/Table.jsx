@@ -69,12 +69,11 @@ export default {
     fetch () {
       const { pagination, filters, sorter, params } = this
       const { search, table } = this.dsl
-      let key
 
       // filters
       const filtersParam = {}
 
-      for (key in filters) {
+      for (const key in filters) {
         const filter = filters[key]
 
         if (filter.length) {
@@ -128,9 +127,7 @@ export default {
       this.filters = filters
       this.sorter = sorter
 
-      this.$nextTick(() => {
-        this.fetch()
-      })
+      this.fetch()
     },
     onSearch (values) {
       const { config } = this.dsl.table
