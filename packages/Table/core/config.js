@@ -1,4 +1,5 @@
 export default {
+  // 表格配置
   table: {
     tableLayout: 'fixed',
     locale: {
@@ -15,6 +16,7 @@ export default {
     },
     loading: false
   },
+  // 搜索配置
   search: {
     method: 'post',
     form: {
