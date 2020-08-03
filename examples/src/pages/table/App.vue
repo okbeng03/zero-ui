@@ -11,6 +11,7 @@
 
 <script>
 import './mock'
+import axios from 'axios'
 
 export default {
   data () {
@@ -57,7 +58,7 @@ export default {
             {
               key: 'descp',
               sorter: true,
-              customRender: 'text += "aaa"; return `<i>${text}</i>`'
+              customRender: `const a = text + 'aaa'; return h('i', {}, [a])`
             },
             'status',
             {
@@ -114,7 +115,7 @@ export default {
               // customRender: 'return `<a-button @click="() => addTodo(record, index)">修改</a-button>`'
             }
           ],
-          // expandedRowRender: 'const text = record.descp + "aaa"; return `<p>${text}</p>`'
+          // expandedRowRender: `const text = record.descp + 'aaa'; return h('p', {}, [text])`
           expandedRowRender: (record) => {
             return (
               <p>{ record.descp + 'aaa' }</p>
