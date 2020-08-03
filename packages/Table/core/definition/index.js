@@ -50,7 +50,7 @@ function traverse (definition, schemaPathMap) {
           throw new Error(`defintion types has not ${type} parser`)
         }
 
-        column = parser.parse(key, schema, parentSchema, definition, definition.options || {})
+        column = parser.parse(key, schema, parentSchema, definition)
       } else {
         column = schemaParser(key, schema, parentSchema, definition)
       }

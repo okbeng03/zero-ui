@@ -8,10 +8,10 @@ Mock.mock('/api/mock', {
         return ['FU', 'JD', '8L'][Math.floor(Math.random() * 3)]
       },
       descp: '12',
-      sellerType: 'A',
-      status: function () {
-        return ['INACTIVE', 'ACTIVE'][Math.round(Math.random())]
+      sellerType: function () {
+        return ['A', 'B', 'C'][Math.floor(Math.random() * 3)]
       },
+      status: '@boolean',
       supplierCode: 'FU',
       logo: '@image',
       createTime: '@DateTime'

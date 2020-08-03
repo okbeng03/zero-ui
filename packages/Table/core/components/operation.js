@@ -1,7 +1,8 @@
 // 操作列
 import button from './button'
 
-export default function (key, schema, parentSchema, definition = {}, options = {}) {
+export default function (key, schema, parentSchema, definition = {}) {
+  const options = definition.options || {}
   const { items } = options
   const actions = []
 

@@ -53,6 +53,7 @@ export default {
             },
             {
               key: 'sellerType',
+              type: 'tag',
               align: 'center'
             },
             {
@@ -136,6 +137,9 @@ export default {
               confirm: {
                 title: '确定删除选中产品？'
               }
+            },
+            {
+              type: 'upload'
             }
           ]
         },
@@ -217,7 +221,10 @@ export default {
           // onDelete: `
           //   this.dataSource.splice(index, 1)
           // `,
-          onDelete: this.onDelete
+          onDelete: this.onDelete,
+          onUpload: function (a) {
+            console.log('upload', a)
+          }
         }
       },
       schema: {
@@ -245,7 +252,7 @@ export default {
             title: '类别说明'
           },
           status: {
-            type: 'string',
+            type: 'boolean',
             title: '状态'
           },
           supplierCode: {
