@@ -40,13 +40,7 @@ function traverse (definition, schemaPathMap) {
     // 自定义渲染
     if (customRender) {
       column = {}
-      column.render = isFunction(customRender) ? customRender : function (h, text, record, index) {
-        const template = (new Function('h', 'text', 'record', 'index', customRender))(h, text, record, index)
-        template.replace('text', 'arguments[0]').replace('record', 'arguments[1]').replace('index', 'arguments[2]')
-        const render = Vue.compile(template)
-
-        return render.render.call(this, h, text, record, index)
-      }
+      column.render = isFunction(customRender) ? customRender : new Function('h', 'text', 'record', 'index', customRender)
       delete definition.customRender
     } else {
       if (type) {
