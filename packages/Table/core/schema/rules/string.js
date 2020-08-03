@@ -7,8 +7,9 @@ const momentFormatMap = {
   time: 'HH:mm:ss'
 }
 
-export default function (key, schema, parentSchema, definition = {}, options = {}) {
+export default function (key, schema, parentSchema, definition = {}) {
   const { format } = schema
+  const options = definition.options || {}
   const column = {}
 
   if (format) {
