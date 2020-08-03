@@ -17,7 +17,7 @@ module.exports = {
   chainWebpack: config => {
     config.resolve.alias
       .set('@', process.cwd())
-      .set('vue$', 'vue/dist/vue.esm.js')
+      .set('vue$', 'vue/dist/vue.runtime.esm.js')
   },
   lintOnSave: false
 }
