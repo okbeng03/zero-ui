@@ -6,7 +6,6 @@ import { types as operationAddonRules } from './core/addons/operation'
 import { rules as definitionRules } from './core/definition'
 import { rules as schemaRules } from './core/schema'
 
-// TODO: 尝试外部添加规则，有没有生效
 const rules = {
   addons, // 暴露 addons 给外部自定义
   schemaRules, // 暴露 schema 规则给外部自定义
