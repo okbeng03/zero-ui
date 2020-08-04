@@ -1,4 +1,4 @@
-import operationParser from '../components/operation'
+import operationParser from '../../components/operation'
 
 export default [
   {

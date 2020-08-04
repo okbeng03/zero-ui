@@ -1,6 +1,6 @@
 // 操作模块
 import { find } from 'lodash'
-import button from '../components/button'
+import button from '../../components/button'
 
 const types = [
   {
