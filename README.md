@@ -1,12 +1,3 @@
-## 开发流程
-```
-# 安装依赖
-npm install
-
-# demo
-npm run serve
-```
-
 # zero-ui
 前端中后台配置化UI
 
