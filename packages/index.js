@@ -14,7 +14,9 @@ const install = function (Vue) {
 
 export {
   tableRules,
-  formRules
+  formRules,
+  Table,
+  Form
 }
 
 export default {
