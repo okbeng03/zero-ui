@@ -29,7 +29,9 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "extend": "^3.0.2",
-    "vuedraggable": "^2.24.0"
+    "objectpath": "^2.0.0",
+    "vuedraggable": "^2.24.0",
+    "json-schema-traverse": "^0.4.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.3.0",
@@ -67,7 +69,6 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-strip-code": "^0.1.4",
-    "json-schema-traverse": "^0.4.1",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "less-plugin-npm-import": "^2.1.0",
