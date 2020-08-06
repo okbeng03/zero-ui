@@ -23,7 +23,19 @@ export default {
             {
               key: 'age',
               type: 'a-slider',
-              decorator: {}
+              decorator: {
+                rules: [
+                  {
+                    validator: function (rule, value, callback) {
+                      if (value < 18) {
+                        callback('必须是成人')
+                      }
+
+                      callback()
+                    }
+                  }
+                ]
+              }
             },
             'workYear',
             'single',
@@ -66,7 +78,7 @@ export default {
           age: {
             type: 'number',
             title: '年龄',
-            minimum: 1,
+            minimum: 20,
             maximum: 120
           },
           workYear: {
