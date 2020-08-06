@@ -33,7 +33,7 @@ export default function (key, schema, parentSchema, definition = {}) {
 
     if (format === 'uri') {
       render = function (h, text, record, index) {
-        return <a href={ text } target={ options.target || '_blank' }>{ text }</a>
+        return <a href={ text } target={ options.target || '_blank' } title={ options.title || '' }>{ text }</a>
       }
     }
 
