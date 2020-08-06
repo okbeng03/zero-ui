@@ -1,3 +1,4 @@
+import extend from 'extend'
 import FormMixin from '../../mixins'
 
 const Control = {
@@ -10,7 +11,7 @@ const Control = {
     const { path, definition, hideTitle } = this
     const component = definition.type
     const groupProps = {
-      ...definition.formItem
+      props: definition.formItem
     }
     const inputProps = {
       props: {
@@ -22,18 +23,23 @@ const Control = {
 
     if (definition.decorator) {
       const id = this.getDecoratorId(definition.key)
+      const decorator = extend(true, {}, definition.decorator)
+
+      if (!decorator.rules) {
+        decorator.rules = []
+      }
+
+      decorator.rules.push({
+        validator: this.handleFieldValidate
+      })
+
       inputProps.directives = [
         {
           name: 'decorator',
           value: [
             id,
             {
-              ...definition.decorator,
-              rules: [
-                {
-                  validator: this.handleFieldValidate
-                }
-              ]
+              ...decorator
             }
           ]
         }
@@ -46,7 +52,7 @@ const Control = {
       }
 
       return h('a-form-item', {
-        props: groupProps,
+        ...groupProps,
       }, [
         h(component, inputProps)
       ])
