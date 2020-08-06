@@ -93,7 +93,7 @@ export default {
     handleFieldValidate (rule, value, callback) {
       const { validate, form, dsl } = this
 
-      if (!dsl.form.validate) {
+      if (!dsl.form.config.validate) {
         callback()
       }
 
