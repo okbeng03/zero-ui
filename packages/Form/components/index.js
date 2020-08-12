@@ -3,7 +3,6 @@ import ZeroCheckbox from './checkbox'
 import ZeroControl from './control'
 import ZeroDateTime from './datetime'
 import ZeroFieldset from './fieldset'
-import ZeroHtml from './html'
 import ZeroInline from './inline'
 import ZeroRadio from './radio'
 import ZeroAction from './action'
@@ -14,7 +13,6 @@ const components = [
   ZeroControl,
   ZeroDateTime,
   ZeroFieldset,
-  ZeroHtml,
   ZeroInline,
   ZeroRadio,
   ZeroAction
@@ -38,7 +36,6 @@ export {
   ZeroControl,
   ZeroDateTime,
   ZeroFieldset,
-  ZeroHtml,
   ZeroInline,
   ZeroRadio
 }
