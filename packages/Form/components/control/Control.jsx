@@ -7,6 +7,28 @@ const Control = {
     hideTitle: Boolean
   },
   mixins: [ FormMixin ],
+  mounted () {
+    const { definition } = this
+
+    // 设置 default value
+    if (definition.decorator) {
+      const id = this.getDecoratorId(definition.key)
+      const val = typeof definition.schema.default !== 'undefined'
+        ? definition.schema.default
+        : definition.schema.type === 'boolean'
+          ? false : undefined
+
+      if (typeof val !== 'undefined') {
+        const value = this.getFieldDefaultValue(id)
+
+        if (typeof value === 'undefined') {
+          this.form.setFieldsValue({
+            [id]: val
+          })
+        }
+      }
+    }
+  },
   render (h) {
     const { path, definition, hideTitle } = this
     const component = definition.type

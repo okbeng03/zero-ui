@@ -41,6 +41,7 @@ export default {
             'single',
             {
               key: 'sex',
+              type: 'select',
               input: {
                 options: [
                   {
@@ -105,9 +106,10 @@ export default {
             }
           },
           other: {
-            'title': '其他',
-            'type': 'string',
-            'maxlength': 100
+            title: '其他',
+            type: 'string',
+            maxlength: 100,
+            default: '222'
           },
           birthday: {
             title: '出生日期',
@@ -120,7 +122,8 @@ export default {
             maxItems: 2,
             items: {
               type: 'string',
-              title: '爱好'
+              title: '爱好',
+              default: 'abc'
             }
           }
         },
@@ -129,10 +132,10 @@ export default {
       model: {
         name: '王昌彬',
         age: 20,
-        single: false,
+        // single: false,
         sex: '0',
         hobby: ['足球'],
-        other: '111',
+        // other: '111',
         birthday: '2020-07-30 12:00:00'
       }
     }

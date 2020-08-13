@@ -1,10 +1,10 @@
 export default {
   $data: true,
   removeAdditional: true,
-  useDefaults: false,
   coerceTypes: true,
   allErrors: true,
   jsonPointers: true,
+  useDefaults: true,
   format: 'fast',
   formats: {
     phone: /^1[3|4|5|6|7|8|9]\d{9}$/,
