@@ -1,3 +1,5 @@
+import ObjectPath from 'objectpath'
+import { findIndex, get, set } from 'lodash'
 import generate from './core'
 import addons from './core/addons'
 import localize from './validate/localize'
@@ -117,6 +119,36 @@ export default {
         callback(error)
       } else {
         callback()
+      }
+    },
+    // 设置指定 key input
+    setOptions (key, options) {
+      let definition = this.dsl.form.config.definition
+      const keys = ObjectPath.parse(key)
+      let flag = true
+
+      keys.forEach((k, i) => {
+        if (k === '0') {
+          definition = (i === 0 ? definition : definition.items)[0]
+          return
+        }
+
+        const path = ObjectPath.stringify(keys.slice(0, i + 1))
+        const idx = findIndex(definition, { key: path })
+
+        if (idx < 0) {
+          flag = false
+          return
+        }
+
+        definition = (i === 0 ? definition : definition.items)[idx]
+      })
+
+      if (flag) {
+        definition.input = {
+          ...definition.input,
+          ...options
+        }
       }
     }
   }

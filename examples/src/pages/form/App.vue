@@ -1,12 +1,14 @@
 <template>
   <div>
     <zero-form
+      ref="zForm"
       :definition="definition"
       :schema="schema"
       :default-value="model"
       @submit="onSubmit"
     >
     </zero-form>
+    <a-button @click="onChange"> 修改配置 </a-button>
   </div>
 </template>
 
@@ -143,6 +145,23 @@ export default {
   methods: {
     onSubmit (values) {
       console.log('submit', values)
+    },
+    onChange () {
+      this.$refs.zForm.setOptions('sex', {
+        options: [
+          {
+            label: '男生',
+            value: '0'
+          },
+          {
+            label: '女生',
+            value: '1'
+          }
+        ]
+      })
+      this.$refs.zForm.setOptions('group[0]', {
+        disabled: true
+      })
     }
   }
 }
