@@ -2,6 +2,7 @@ import checkboxParse from './rules/checkbox'
 import htmlParse from './rules/html'
 import radioParse from './rules/radio'
 import textareaParse from './rules/textarea'
+import selectParse from '../schema/rules/select'
 
 export default [
   {
@@ -19,5 +20,9 @@ export default [
   {
     name: 'textarea',
     parse: textareaParse
+  },
+  {
+    name: 'select',
+    parse: selectParse
   }
 ]

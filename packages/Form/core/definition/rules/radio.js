@@ -1,6 +1,6 @@
 import { enumToOptions } from '../../../../util/util'
 
-export default function (definition, schema) {
+export default function (schema) {
   if (schema && schema.enums) {
     return {
       type: 'zero-radio',

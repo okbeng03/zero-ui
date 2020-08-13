@@ -7,7 +7,7 @@ export default function (definition, schema, parentSchema) {
   const parser = find(rules, { name: type })
 
   if (parser) {
-    return parser.parse(definition, schema, parentSchema)
+    return parser.parse(schema, parentSchema, definition)
   }
 
   return extend(true, {}, definition)
