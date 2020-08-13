@@ -47,7 +47,7 @@ export default {
     this.model.value = this.defaultValue
 
     this.$watch('defaultValue', (newValue) => {
-      this.model.value = newValue
+      this.form.setFieldsValue(newValue)
     }, {
       deep: true
     })
