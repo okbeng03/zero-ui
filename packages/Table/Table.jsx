@@ -94,7 +94,6 @@ export default {
         sorter: sorterParam,
         search: params
       }
-      console.log(searchParam)
       table.config.loading = true
 
       axios({
