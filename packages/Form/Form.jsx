@@ -14,11 +14,18 @@ export default {
   },
   data () {
     return {
-      dsl: {},
+      // dsl: {},
       form: this.$form.createForm(this),
       model: {
         value: null
       }
+    }
+  },
+  computed: {
+    dsl () {
+      const { definition, schema } = this
+
+      return generate(definition, schema)
     }
   },
   provide () {
@@ -30,18 +37,10 @@ export default {
   },
   created () {
     const { definition, schema } = this
-    this.dsl = generate(definition, schema)
     this.validate = this.$validator.compile(schema)
 
     this.$watch('schema', (schema) => {
       this.validate = this.$validator.compile(schema)
-      this.dsl = generate(this.definition, schema)
-    }, {
-      deep: true
-    })
-
-    this.$watch('definition', (definition) => {
-      this.dsl = generate(definition, this.schema)
     }, {
       deep: true
     })
