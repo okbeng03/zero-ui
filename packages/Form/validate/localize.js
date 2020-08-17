@@ -6,6 +6,8 @@ export default function localize (errors = [], schema) {
     return
   }
 
+  const errorMessage = schema.errorMessage
+
   for (let i = 0; i < errors.length; i++) {
     let e = errors[i]
     let out
@@ -25,6 +27,15 @@ export default function localize (errors = [], schema) {
     e.path = path = path.substr(1).replace(regSpit, '.').replace(regIndex, '[$1]')
     const s = schema[path]
     const title = s ? s.title : ''
+
+    if (errorMessage && errorMessage[path]) {
+      const msg = errorMessage[path][e.keyword] || errorMessage[path].message
+
+      if (msg) {
+        e.message = msg
+        continue
+      }
+    }
 
     switch (e.keyword) {
       case '$ref':

@@ -93,13 +93,12 @@ export default {
       })
     },
     handleFieldValidate (rule, value, callback) {
-      const { validate, form, dsl } = this
+      const { validate, form, dsl, schema } = this
 
       if (!dsl.form.config.validate) {
         callback()
       }
 
-      const schema = dsl.schemaPathMap
       const path = rule.fullField
       const model = form.getFieldsValue()
       // 移除空数据
