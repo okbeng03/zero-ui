@@ -95,7 +95,7 @@ export default {
           sex: {
             type: 'string',
             title: '性别',
-            enum: ['0', '1'],
+            // enum: ['0', '1'],
             default: '0'
           },
           hobby: {

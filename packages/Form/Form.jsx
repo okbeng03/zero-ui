@@ -36,7 +36,7 @@ export default {
     }
   },
   created () {
-    const { definition, schema } = this
+    const { schema } = this
     this.validate = this.$validator.compile(schema)
 
     this.$watch('schema', (schema) => {
@@ -147,6 +147,8 @@ export default {
           ...definition.input,
           ...options
         }
+
+        this.$forceUpdate()
       }
     }
   }
