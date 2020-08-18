@@ -106,6 +106,7 @@ export default {
 
           this.dataSource = list
           table.config.pagination.total = total
+          this.$emit('search', data)
         } else {
           this.$message.error(message || '网络异常，请稍后再试！')
         }
