@@ -107,7 +107,7 @@ export default {
       let error
 
       if (!valid) {
-        localize(validate.errors, schema)
+        localize(validate.errors, schema, dsl.schemaPathMap)
         const allErrors = parseErrors(validate.errors)
 
         if (allErrors[path]) {

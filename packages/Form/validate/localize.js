@@ -1,7 +1,7 @@
 const regSpit = /\//g
 const regIndex = /\.(\d+)/g
 
-export default function localize (errors = [], schema) {
+export default function localize (errors = [], schema, schemaPathMap) {
   if (!errors.length) {
     return
   }
@@ -25,7 +25,7 @@ export default function localize (errors = [], schema) {
     }
 
     e.path = path = path.substr(1).replace(regSpit, '.').replace(regIndex, '[$1]')
-    const s = schema[path]
+    const s = schemaPathMap[path]
     const title = s ? s.title : ''
 
     if (errorMessage && errorMessage[path]) {
