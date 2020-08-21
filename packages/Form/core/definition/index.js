@@ -4,14 +4,13 @@ import extend from 'extend'
 import defaultRule from '../schema/rules/default'
 import schemaParser from '../schema'
 import definitionParser from './parse'
+import schemaPath from '../../../util/schemaPath'
 
 function parse (definition, schemaPathMap, root) {
-  const schemaPathMapKeys = Object.keys(schemaPathMap)
   const items = definition.items
 
   // 转成嵌套结构
-  const constructKeys = []
-  construct(schemaPathMapKeys, constructKeys, '')
+  const constructKeys = generateDefaults(null, schemaPathMap)
 
   // 补齐完整 definition
   const dsl = parseDefinition(items)
@@ -21,6 +20,20 @@ function parse (definition, schemaPathMap, root) {
   const _definition = parseRule(dsl, schemaPathMap, root, definition)
 
   return _definition
+}
+
+export function generateDefaults (schema, schemaPathMap) {
+  if (schema) {
+    schemaPathMap = schemaPath(schema)
+  }
+
+  const schemaPathMapKeys = Object.keys(schemaPathMap)
+
+  // 转成嵌套结构
+  const constructKeys = []
+  construct(schemaPathMapKeys, constructKeys, '')
+
+  return constructKeys
 }
 
 // 生成渲染数据结构

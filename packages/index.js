@@ -1,5 +1,5 @@
 import Table, { rules as tableRules } from './Table'
-import Form, { rules as formRules } from './Form'
+import Form, { rules as formRules, generateDefaults } from './Form'
 
 const components = [
   Table,
@@ -16,7 +16,8 @@ export {
   tableRules,
   formRules,
   Table,
-  Form
+  Form,
+  generateDefaults
 }
 
 export default {

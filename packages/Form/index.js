@@ -5,6 +5,7 @@ import validator from './validate'
 import addons from './core/addons'
 import definitionRules from './core/definition/rule'
 import schemaRules from './core/schema/rule'
+import { generateDefaults } from './core/definition'
 
 const rules = {
   addons, // 暴露 addons 给外部自定义
@@ -14,7 +15,8 @@ const rules = {
 }
 
 export {
-  rules
+  rules,
+  generateDefaults
 }
 
 /* istanbul ignore next */
