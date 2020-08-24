@@ -70,7 +70,7 @@ const Control = {
 
     if (definition.formItem && definition.formItem.label) {
       if (hideTitle) {
-        groupProps.label = ''
+        groupProps.props.label = ''
       }
 
       return h('a-form-item', {
