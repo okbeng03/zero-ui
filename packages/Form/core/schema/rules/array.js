@@ -44,8 +44,6 @@ export default function (schema) {
             label: val.title || '',
             required
           })
-  
-          val.title = ''
         })
 
         definition.columns = columns
