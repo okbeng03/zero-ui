@@ -1,6 +1,7 @@
 import { size, each } from 'lodash'
+import ObjectPath from 'objectpath'
 
-export default function (schema) {
+export default function (schema, parentSchema, def) {
   const type = schema.type
 
   if (type === 'array') {
@@ -36,8 +37,10 @@ export default function (schema) {
         const columns = []
         const col = Math.floor(24 / len)
 
-        _.each(childSchema.properties, (val, key ) => {
+        _.each(def.items[0].items, (item) => {
+          const key = ObjectPath.parse(item.key).pop()[0]
           const required = childSchema.required && _.indexOf(childSchema.required, key) !== -1
+          const val = childSchema.properties[key]
 
           columns.push({
             col,
