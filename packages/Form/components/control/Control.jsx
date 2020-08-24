@@ -68,7 +68,7 @@ const Control = {
       ]
     }
 
-    if (definition.formItem && definition.formItem.label) {
+    if (definition.decorator || (definition.formItem && definition.formItem.label)) {
       if (hideTitle) {
         groupProps.props.label = ''
       }
