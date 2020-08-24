@@ -2,11 +2,11 @@ export default function (schema) {
   const type = schema.type
 
   if (type === 'object') {
-    const defintion = {
+    const definition = {
       type: 'zero-fieldset'
     }
 
-    return defintion
+    return definition
   }
 
   return

@@ -91,7 +91,7 @@ function construct (schemaPathMapKeys, parent, parentPath = '') {
       const isArray = childs[0] === '[0]'
       const node = {
         key: path,
-        type: isArray ? 'array' : 'filedset',
+        type: isArray ? 'array' : 'object',
         items: []
       }
       construct(childs, node.items, `${path}${isArray ? '' : '.'}`)
