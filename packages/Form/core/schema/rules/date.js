@@ -6,6 +6,7 @@ export default function (schema) {
 
   if (type === 'string' && (format && DATE_TYPE_ENUM.indexOf(format) > -1)) {
     let momentFormat = ''
+    let type = 'zero-date-picker'
 
     switch (format) {
       case 'date-time':
@@ -13,16 +14,18 @@ export default function (schema) {
         break
       case 'time':
         momentFormat = 'HH:mm:ss'
+        type = 'zero-time-picker'
         break
       default:
         momentFormat = 'YYYY-MM-DD'
     }
 
     return {
-      type: 'zero-date-time-picker',
+      type,
       input: {
         type: format,
-        format: momentFormat
+        format: momentFormat,
+        valueFormat: momentFormat
       },
       decorator: {}
     }
