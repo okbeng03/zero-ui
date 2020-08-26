@@ -8,6 +8,7 @@ export default function (schema, parentSchema, def) {
     const childSchema = schema.items
     const definition = {
       type: 'zero-list',
+      isLayout: true,
       input: {}
     }
 

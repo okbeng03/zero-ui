@@ -3,7 +3,8 @@ export default function (schema) {
 
   if (type === 'object') {
     const definition = {
-      type: 'zero-fieldset'
+      type: 'zero-fieldset',
+      isLayout: true
     }
 
     return definition
