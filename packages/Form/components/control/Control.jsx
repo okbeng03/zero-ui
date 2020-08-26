@@ -76,10 +76,10 @@ const Control = {
       return h('a-form-item', {
         ...groupProps,
       }, [
-        h(component, inputProps)
+        h(component, inputProps, definition.input.children || [])
       ])
     } else {
-      return h(component, inputProps)
+      return h(component, inputProps, definition.input.children || [])
     }
   }
 }
