@@ -68,6 +68,11 @@ function traverse (def, schemaPathMap, parentSchema, definition) {
     config = definitionParser(def, schema, parentSchema)
   }
 
+  // 非布局组件，必须加上decorator
+  if (!config.isLayout && typeof config.decorator === 'undefined') {
+    config.decorator = {}
+  }
+
   if (def.items) {
     config.items = parseRule(def.items, schemaPathMap, parentSchema, definition)
   }
