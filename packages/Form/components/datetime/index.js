@@ -1,11 +1,13 @@
 import { DatePicker, TimePicker } from 'ant-design-vue'
-import DateTimePicker from './Datetime'
+import ZeroDatePicker from './DatePicker'
+import ZeroTimePicker from './TimePicker'
 
 /* istanbul ignore next */
-DateTimePicker.install = function (Vue) {
+ZeroDatePicker.install = function (Vue) {
   Vue.use(DatePicker)
   Vue.use(TimePicker)
-  Vue.component(DateTimePicker.name, DateTimePicker)
+  Vue.component(ZeroDatePicker.name, ZeroDatePicker)
+  Vue.component(ZeroTimePicker.name, ZeroTimePicker)
 }
 
-export default DateTimePicker
+export default ZeroDatePicker
