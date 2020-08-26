@@ -1,20 +1,20 @@
 import ZeroArray from './array'
-import ZeroCheckbox from './checkbox'
+// import ZeroCheckbox from './checkbox'
 import ZeroControl from './control'
 import ZeroDateTime from './datetime'
 import ZeroFieldset from './fieldset'
 import ZeroInline from './inline'
-import ZeroRadio from './radio'
+// import ZeroRadio from './radio'
 import ZeroAction from './action'
 
 const components = [
   ZeroArray,
-  ZeroCheckbox,
+  // ZeroCheckbox,
   ZeroControl,
   ZeroDateTime,
   ZeroFieldset,
   ZeroInline,
-  ZeroRadio,
+  // ZeroRadio,
   ZeroAction
 ]
 
@@ -32,12 +32,12 @@ if (typeof window !== 'undefined' && window.Vue) {
 export {
   install,
   ZeroArray,
-  ZeroCheckbox,
+  // ZeroCheckbox,
   ZeroControl,
   ZeroDateTime,
   ZeroFieldset,
-  ZeroInline,
-  ZeroRadio
+  ZeroInline
+  // ZeroRadio
 }
 
 export default {
