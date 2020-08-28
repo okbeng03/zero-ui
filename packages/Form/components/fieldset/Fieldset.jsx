@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import FormMixin from '../../mixins'
+import FormMixin from '../../mixins/form'
 
 const Fieldset = {
   name: 'zero-fieldset',

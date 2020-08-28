@@ -1,5 +1,4 @@
-import moment from 'moment'
-import FormMixin from '../../mixins'
+import FormMixin from '../../mixins/form'
 import DateMixin from '../../mixins/date'
 
 const DateTimePicker = {

@@ -6,12 +6,14 @@ import addons from './core/addons'
 import definitionRules from './core/definition/rule'
 import schemaRules from './core/schema/rule'
 import { generateDefaults } from './core/definition'
+import mixin from './mixins'
 
 const rules = {
   addons, // 暴露 addons 给外部自定义
   schemaRules, // 暴露 schema 规则给外部自定义
   definitionRules, // 暴露 defintion 规则给外部自定义
   ajv: validator,
+  mixin
 }
 
 export {

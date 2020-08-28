@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import draggable from 'vuedraggable'
-import FormMixin from '../../mixins'
+import FormMixin from '../../mixins/form'
 
 const List = {
   name: 'zero-list',

@@ -1,5 +1,5 @@
 import extend from 'extend'
-import FormMixin from '../../mixins'
+import FormMixin from '../../mixins/form'
 
 const Control = {
   name: 'zero-control',

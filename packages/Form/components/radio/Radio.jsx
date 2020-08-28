@@ -1,4 +1,4 @@
-import FormMixin from '../../mixins'
+import FormMixin from '../../mixins/form'
 
 const Radio = {
   name: 'zero-radio',

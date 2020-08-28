@@ -4,7 +4,8 @@ export default function (schema, parentSchema, definition) {
   const type = schema.type
   const format = schema.format
   const cType = definition.type
-  const mode = definition.input ? definition.input.mode : (cType === 'zero-date-picker' ? 'date' : '')
+  let mode = definition.input ? definition.input.mode : ''
+  mode = mode ? mode : (cType === 'zero-date-picker' ? 'date' : '')
 
   if (type === 'string' && ((format && DATE_TYPE_ENUM.indexOf(format) > -1) || cType === 'zero-date-picker' || cType === 'zero-time-picker')) {
     let momentFormat = ''
