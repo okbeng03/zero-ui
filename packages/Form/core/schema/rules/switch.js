@@ -1,7 +1,7 @@
-export default function (schema) {
+export default function (schema, parentSchema, definition) {
   const type = schema.type
 
-  if (type === 'boolean') {
+  if (type === 'boolean' || definition.type === 'a-switch') {
     return {
       type: 'a-switch',
       decorator: {
