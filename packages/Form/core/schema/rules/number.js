@@ -3,7 +3,7 @@ export default function (schema) {
 
   if (type === 'number' || type === 'integer') {
     const definition = {
-      type: 'a-input-number',
+      type: 'zero-input-number',
       decorator: {
         validateTrigger: 'blur'
       },
