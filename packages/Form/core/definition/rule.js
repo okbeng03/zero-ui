@@ -5,6 +5,7 @@
 // import selectParse from '../schema/rules/select'
 import datePickerParse from '../schema/rules/date'
 import switchParse from '../schema/rules/switch'
+import inlineParse from './rules/inline'
 
 export default [
   {
@@ -19,6 +20,10 @@ export default [
     name: 'a-switch',
     parse: switchParse
   },
+  {
+    name: 'zero-inline',
+    parse: inlineParse
+  }
   // {
   //   name: 'radio',
   //   parse: radioParse

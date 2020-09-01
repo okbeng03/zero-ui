@@ -90,10 +90,11 @@ const List = {
             definition: definition.items[0]
           }
 
-          const child = columns ? h('zero-list-inline', {
+          const child = columns ? h('zero-inline', {
             props: {
               ...props,
-              columns
+              columns,
+              hideTitle: true
             }
           }) : h('zero-control', {
             props

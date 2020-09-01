@@ -40,7 +40,7 @@ export function generateDefaults (schema, schemaPathMap) {
 function parseRule (dsl, schemaPathMap, root, definition) {
   const def = dsl[0]
   const key = def.key
-  const keyArray = ObjectPath.parse(key)
+  const keyArray = key ? ObjectPath.parse(key) : []
   keyArray.splice(-1, 1)
   const parentSchema = keyArray.length
     ? schemaPathMap[ObjectPath.stringify(keyArray)]
@@ -58,7 +58,7 @@ function traverse (def, schemaPathMap, parentSchema, definition) {
   const schema = schemaPathMap[key]
   let config
   // 获取 schema 默认配置
-  const defaults = defaultRule(key, schema, parentSchema, definition)
+  const defaults = key ? defaultRule(key, schema, parentSchema, definition) : {}
 
   // definition 未指定type or type 为基础类型，走 schema 基础规则解析
   if (!def.type || baseTypes.indexOf(def.type) > -1) {
@@ -123,7 +123,7 @@ function fill (items, schemaPathMap) {
     items.splice(idx, 1, ...schemaPathMap)
     return
   }
-  
+
   items.forEach(item => {
     if (typeof item === 'string') {
       return
@@ -132,27 +132,28 @@ function fill (items, schemaPathMap) {
     if (item.items) {
       const child = find(schemaPathMap, child => child.key === item.key)
 
-      if (child) {
-        fill(item.items, child.items)
-      }
+      fill(item.items, child ? child.items : schemaPathMap)
     }
+
+    remove(schemaPathMap, exitItem => exitItem.key === item.key)
   })
 
   if (idx > -1) {
-    const _items = generate(items, schemaPathMap)
-    items.splice(idx, 1, ..._items)
+    // const _items = generate(items, schemaPathMap)
+    items.splice(idx, 1, ...schemaPathMap)
   }
 }
 
 // 排除已定义 formItem
-function generate (exitItems, schemaPathMap) {
-  const items = cloneDeep(schemaPathMap)
-  exitItems.forEach(exitItem => {
-    remove(items, item => typeof exitItem === 'string' ? exitItem === item.key : exitItem.key === item.key)
-  })
+// function generate (exitItems, schemaPathMap) {
+//   const items = cloneDeep(schemaPathMap)
+//   const items = schemaPathMap
+//   exitItems.forEach(exitItem => {
+//     remove(items, item => typeof exitItem === 'string' ? exitItem === item.key : exitItem.key === item.key)
+//   })
 
-  return items
-}
+//   return items
+// }
 
 const regArrayKeyword = /\[\]/g
 
@@ -164,7 +165,7 @@ function parseDefinition (items) {
         key: item.replace(regArrayKeyword, '[0]')
       }
     } else {
-      if (!item.key) {
+      if (typeof item.key === 'undefined') {
         return item
       }
 
