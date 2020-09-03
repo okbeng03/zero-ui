@@ -1,5 +1,5 @@
 import ObjectPath from 'objectpath'
-import { findIndex, get, set } from 'lodash'
+import { findIndex, filter } from 'lodash'
 import generate from './core'
 import addons from './core/addons'
 import localize from './validate/localize'
@@ -135,14 +135,30 @@ export default {
         }
 
         const path = ObjectPath.stringify(keys.slice(0, i + 1))
-        const idx = findIndex(definition, { key: path })
+        let idx = findIndex(definition, { key: path })
 
         if (idx < 0) {
-          flag = false
-          return
+          // 增加容器组件后，会存在 item 包装在 key = '' 的容器组件内
+          const emptyList = filter(definition, { key: '' })
+          const len = emptyList.length
+          let i = 0
+
+          for (; i < len; i++) {
+            idx = findIndex(emptyList[i].items, { key: path })
+
+            if (idx > -1) {
+              definition = emptyList[i]
+              break
+            }
+          }
+
+          if (idx < 0) {
+            flag = false
+            return
+          }
         }
 
-        definition = (i === 0 ? definition : definition.items)[idx]
+        definition = (definition.items ? definition.items : definition)[idx]
       })
 
       if (flag) {
