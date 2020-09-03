@@ -7,7 +7,7 @@ export default {
     const { html } = this.definition.input
 
     return (
-      <div class="zero-group-item" domPropsInnerHTML={ html }></div>
+      <div class="zero-html zero-input" domPropsInnerHTML={ html }></div>
     )
   }
 }
