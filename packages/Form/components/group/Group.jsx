@@ -5,52 +5,32 @@ const List = {
   name: 'zero-group',
   mixins: [ FormMixin ],
   render (h) {
-    return (
-      <div class="zero-group">
-        { this.renderItems(h) }
-      </div>
-    )
+    const { definition } = this
+    const groupProps = {
+      attrs: {
+        class: 'ant-row ant-form-item zero-group'
+      },
+      props: definition.formItem
+    }
+
+    return h('a-form-item', {
+      ...groupProps,
+    }, [
+      this.renderItems(h)
+    ])
   },
   methods: {
     renderItems (h) {
       const { definition } = this
 
-      return definition.items.map((item, i) => {
-        const component = item.type
-        const inputProps = {
+      return (definition.items || definition).map(item => {
+        return h('zero-control', {
           props: {
-            ...item.input,
+            path: this.getPath(item.key),
             definition: item,
-            path: this.getPath(item.key)
+            hideTitle: true
           }
-        }
-
-        if (item.decorator) {
-          const id = this.getDecoratorId(item.key)
-          const decorator = extend(true, {}, item.decorator)
-    
-          if (!decorator.rules) {
-            decorator.rules = []
-          }
-    
-          decorator.rules.push({
-            validator: this.handleFieldValidate
-          })
-    
-          inputProps.directives = [
-            {
-              name: 'decorator',
-              value: [
-                id,
-                {
-                  ...decorator
-                }
-              ]
-            }
-          ]
-        }
-
-        return h(component, inputProps, definition.input.children || [])
+        })
       })
     }
   }
