@@ -7,6 +7,8 @@ import ZeroInline from './inline'
 // import ZeroRadio from './radio'
 import ZeroAction from './action'
 import ZeroInputNumber from './inputNumber'
+import ZeroHtml from './html'
+import ZeroGroup from './group'
 
 const components = [
   ZeroArray,
@@ -17,7 +19,9 @@ const components = [
   ZeroInline,
   // ZeroRadio,
   ZeroAction,
-  ZeroInputNumber
+  ZeroInputNumber,
+  ZeroHtml,
+  ZeroGroup
 ]
 
 const install = function (Vue) {
@@ -39,7 +43,9 @@ export {
   ZeroDateTime,
   ZeroFieldset,
   ZeroInline,
-  ZeroInputNumber
+  ZeroInputNumber,
+  ZeroHtml,
+  ZeroGroup
   // ZeroRadio
 }
 
