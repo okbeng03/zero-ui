@@ -22,7 +22,12 @@ export default function (schema, parentSchema, def) {
 
     if (childSchema.type === 'object') {
       const len = size(childSchema.properties)
+      const childType = def.items[0].type
       let flag = false
+
+      if (typeof childType !== 'undefined' && childType !== 'zero-inline') {
+        return definition
+      }
 
       if (len <= 6) {
         flag = true

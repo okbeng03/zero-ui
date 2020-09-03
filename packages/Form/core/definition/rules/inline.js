@@ -4,6 +4,7 @@ export default function (schema, parentSchema, definition) {
   const { columns = [], labelCol, wrapperCol } = definition.formItem || {}
 
   const def = {
+    type: 'zero-inline',
     isLayout: true,
     input: {},
     formItem: {}
