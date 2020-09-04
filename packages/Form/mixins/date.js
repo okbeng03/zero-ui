@@ -10,9 +10,9 @@ export default {
   },
   computed: {
     format () {
-      const { type } = this
+      const { type, format } = this.definition.input
 
-      return this.definition.input.format || (type === 'time' ? 'HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss')
+      return format || (type === 'time' ? 'HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss')
     }
   },
   data () {

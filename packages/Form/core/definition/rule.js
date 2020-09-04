@@ -9,6 +9,7 @@ import datePickerParse from '../schema/rules/date'
 import switchParse from '../schema/rules/switch'
 import inlineParse from './rules/inline'
 import groupParse from './rules/group'
+import rangePickerParse from './rules/rangePicker'
 
 export default [
   {
@@ -42,5 +43,9 @@ export default [
   {
     name: 'zero-group',
     parse: groupParse
+  },
+  {
+    name: 'zero-range-picker',
+    parse: rangePickerParse
   }
 ]

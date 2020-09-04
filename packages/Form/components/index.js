@@ -9,6 +9,7 @@ import ZeroAction from './action'
 import ZeroInputNumber from './inputNumber'
 import ZeroHtml from './html'
 import ZeroGroup from './group'
+import ZeroRangePicker from './rangePicker'
 
 const components = [
   ZeroArray,
@@ -21,7 +22,8 @@ const components = [
   ZeroAction,
   ZeroInputNumber,
   ZeroHtml,
-  ZeroGroup
+  ZeroGroup,
+  ZeroRangePicker
 ]
 
 const install = function (Vue) {
@@ -45,7 +47,8 @@ export {
   ZeroInline,
   ZeroInputNumber,
   ZeroHtml,
-  ZeroGroup
+  ZeroGroup,
+  ZeroRangePicker
   // ZeroRadio
 }
 
