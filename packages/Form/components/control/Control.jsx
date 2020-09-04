@@ -13,19 +13,19 @@ const Control = {
     // 设置 default value
     if (definition.decorator) {
       const id = this.getDecoratorId(definition.key)
-      const val = typeof definition.schema.default !== 'undefined'
+      let val = this.getFieldDefaultValue(id)
+
+      if (typeof val === 'undefined') {
+        val = typeof definition.schema.default !== 'undefined'
         ? definition.schema.default
         : definition.schema.type === 'boolean'
           ? false : undefined
+      }
 
       if (typeof val !== 'undefined') {
-        const value = this.getFieldDefaultValue(id)
-
-        if (typeof value === 'undefined') {
-          this.form.setFieldsValue({
-            [id]: val
-          })
-        }
+        this.form.setFieldsValue({
+          [id]: val
+        })
       }
     }
   },
