@@ -40,6 +40,9 @@ const Control = {
         ...definition.input,
         definition,
         path
+      },
+      attrs: {
+        ...(definition.attrs || {})
       }
     }
 
