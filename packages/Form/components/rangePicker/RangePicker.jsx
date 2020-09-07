@@ -25,8 +25,8 @@ const DateTimePicker = {
       let val = this.getFieldDefaultValue(id)
 
       if (typeof val === 'undefined') {
-        val = typeof definition.schema.default !== 'undefined'
-        ? definition.schema.default : undefined
+        val = typeof item.schema.default !== 'undefined'
+        ? item.schema.default : undefined
       }
 
       if (typeof val !== 'undefined') {
