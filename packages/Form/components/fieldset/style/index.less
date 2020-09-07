@@ -18,9 +18,16 @@
 .zero-group {
   margin-bottom: 0 !important;
 
-  .ant-form-item {
-    display: inline-block;
-    margin-right: 10px;
+  > .ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children {
+    display: flex;
+
+    .zero-group-item {
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
 
   .ant-form-item-children > .zero-input {

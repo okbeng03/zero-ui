@@ -24,13 +24,27 @@ const List = {
       const { definition } = this
 
       return (definition.items || definition).map(item => {
-        return h('zero-control', {
-          props: {
-            path: this.getPath(item.key),
-            definition: item,
-            hideTitle: true
-          }
-        })
+        const style = {}
+
+        if (item.width) {
+          style.width = item.width
+        } else {
+          style.flex = 1
+        }
+
+        return (
+          <div class="zero-group-item" style={ style }>
+            {
+              h('zero-control', {
+                props: {
+                  path: this.getPath(item.key),
+                  definition: item,
+                  hideTitle: true
+                }
+              })
+            }
+          </div>
+        )
       })
     }
   }
