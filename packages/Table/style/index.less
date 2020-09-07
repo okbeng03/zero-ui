@@ -7,28 +7,12 @@
   padding-top: 10px;
 
   .zero-fieldset {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
     .ant-form-item {
-      display: flex;
-      flex-direction: row;
-      margin-right: 0;
+      margin-bottom: 0;
+    }
+
+    > .ant-row {
       margin-bottom: 10px;
-      width: 33.3%;
-    }
-
-    .ant-form-item-label {
-      width: 30%;
-    }
-
-    .ant-form-item-control-wrapper {
-      flex: 1;
-    }
-
-    .ant-calendar-picker {
-      width: 100%;
     }
   }
 
@@ -66,19 +50,6 @@
 
     .zero-button {
       margin-left: 8px;
-    }
-  }
-}
-
-@media only screen and (min-width: 1200px) {
-  .zero-table-search {
-    .zero-fieldset {
-      .ant-form-item {
-        display: flex;
-        flex-direction: row;
-        margin-right: 0;
-        width: 25%;
-      }
     }
   }
 }
