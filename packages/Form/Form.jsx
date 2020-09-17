@@ -106,11 +106,10 @@ export default {
       // 移除空数据
       removeEmptyValue(model)
       const valid = validate(model)
-
       let error
-
+      
       if (!valid) {
-        localize(validate.errors, this.$validator.errors, schema, dsl.schemaPathMap, this.$validator)
+        localize(validate.errors, this.$validator.errors || [], schema, dsl.schemaPathMap, this.$validator)
         const allErrors = parseErrors(validate.errors)
 
         if (allErrors[path]) {
