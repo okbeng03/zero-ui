@@ -105,12 +105,12 @@ export default {
       const model = form.getFieldsValue()
       // 移除空数据
       removeEmptyValue(model)
-
       const valid = validate(model)
+
       let error
 
       if (!valid) {
-        localize(validate.errors, schema, dsl.schemaPathMap)
+        localize(validate.errors, this.$validator.errors, schema, dsl.schemaPathMap, this.$validator)
         const allErrors = parseErrors(validate.errors)
 
         if (allErrors[path]) {

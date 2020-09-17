@@ -8,11 +8,13 @@ import schemaRules from './core/schema/rule'
 import { generateDefaults } from './core/definition'
 import mixin from './mixins'
 
+const ajv = validator()
+
 const rules = {
   addons, // 暴露 addons 给外部自定义
   schemaRules, // 暴露 schema 规则给外部自定义
   definitionRules, // 暴露 defintion 规则给外部自定义
-  ajv: validator,
+  ajv,
   mixin
 }
 
@@ -37,7 +39,7 @@ ZForm.install = function (Vue) {
   Vue.use(Radio)
 
   Vue.prototype.$message = message
-  Vue.prototype.$validator = validator()
+  Vue.prototype.$validator = ajv
   Vue.component(ZForm.name, ZForm)
   Vue.use(ZeroForm)
 }

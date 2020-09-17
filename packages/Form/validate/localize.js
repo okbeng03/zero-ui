@@ -1,10 +1,18 @@
+import { find } from 'lodash'
+
 const regSpit = /\//g
 const regIndex = /\.(\d+)/g
 
-export default function localize (errors = [], schema, schemaPathMap) {
+export default function localize (errors = [], customErrors = [], schema, schemaPathMap, ajv) {
   if (!errors.length) {
     return
   }
+
+  customErrors.forEach(item => {
+    const error = find(errors, err => err.keyword === item.keyword && err.dataPath === item.dataPath)
+
+    error.message = item.message
+  })
 
   const errorMessage = schema.errorMessage
 
@@ -180,4 +188,6 @@ export default function localize (errors = [], schema, schemaPathMap) {
 
     e.message = out
   }
+
+  ajv.errors = null
 }
