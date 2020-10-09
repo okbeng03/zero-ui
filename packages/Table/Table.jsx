@@ -1,4 +1,4 @@
-import axios from 'axios'
+// import axios from 'axios'
 import generate from './core'
 import addons from './core/addons'
 
@@ -94,28 +94,36 @@ export default {
         sorter: sorterParam,
         search: params
       }
+
       table.config.loading = true
 
-      axios({
-        method: search.config.method,
-        url: search.config.api,
-        data: searchParam
-      }).then(({ status, data, message }) => {
-        if (status === 200) {
-          const { list = [], total } = data
+      // search callback
+      if (search.config.fetch && typeof search.config.fetch === 'function') {
+        search.config.fetch.call(this, searchParam)
+      } else {
+        this.$axios({
+          method: search.config.method,
+          url: search.config.api,
+          data: searchParam
+        }).then(data => {
+          this.onFetchSuccess(data)
+        }).catch(err => {
+          console.error(err)
+          this.onFetchFail(err.message)
+        })
+      }
+    },
+    onFetchSuccess (data) {
+      const { list = [], total } = data
 
-          this.dataSource = list
-          table.config.pagination.total = total
-          this.$emit('search', data)
-        } else {
-          this.$message.error(message || '网络异常，请稍后再试！')
-        }
-      }).catch(err => {
-        console.error(err)
-        this.$message.error(err.message || '网络异常，请稍后再试！')
-      }).finally(() => {
-        table.config.loading = false
-      })
+      this.dataSource = list
+      this.dsl.table.config.pagination.total = total
+      this.$emit('search', data)
+      this.dsl.table.config.loading = false
+    },
+    onFetchFail (message = '网络异常，请稍后再试！') {
+      this.$message.error(message)
+      this.dsl.table.config.loading = false
     },
     onChange (pagination, filters, sorter) {
       const { config } = this.dsl.table
