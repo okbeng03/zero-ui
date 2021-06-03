@@ -6,7 +6,8 @@ export default {
   name: 'ZeroTable',
   props: {
     definition: Object,
-    schema: Object
+    schema: Object,
+    dataSource: Array
   },
   data () {
     return {
@@ -15,7 +16,7 @@ export default {
       filters: {},
       sorter: {},
       params: {},
-      dataSource: []
+      list: []
     }
   },
   computed: {
@@ -46,6 +47,12 @@ export default {
   },
   mounted () {
     this.fetch()
+
+    const { dataSource } = this
+
+    if (dataSource && dataSource.length) {
+      this.list = dataSource
+    }
   },
   render (h) {
     const { dsl } = this
@@ -69,6 +76,10 @@ export default {
     fetch () {
       const { pagination, filters, sorter, params } = this
       const { search, table } = this.dsl
+
+      if (!search.config.api) {
+        return
+      }
 
       // filters
       const filtersParam = {}
@@ -101,7 +112,7 @@ export default {
       if (search.config.fetch && typeof search.config.fetch === 'function') {
         search.config.fetch.call(this, searchParam)
       } else {
-        this.$axios({
+        this.$request({
           method: search.config.method,
           url: search.config.api,
           data: searchParam
@@ -114,9 +125,9 @@ export default {
       }
     },
     onFetchSuccess (data) {
-      const { list = [], total } = data
+      const { list = [], total = 0 } = data
 
-      this.dataSource = list
+      this.list = list
       this.dsl.table.config.pagination.total = total
       this.$emit('search', data)
       this.dsl.table.config.loading = false

@@ -7,6 +7,13 @@ import defaultConfig from '../config'
 
 export default function (table, schema, schemaPathMap) {
   const columns = columnsParse(table.columns, schemaPathMap)
+
+  if (table.pagination === false) {
+    table.pagination = {
+      hidden: true
+    }
+  }
+
   const config = extend(true, {}, defaultConfig.table, {
     ...table,
     columns,
@@ -14,7 +21,7 @@ export default function (table, schema, schemaPathMap) {
   })
 
   const render = function (h) {
-    const { dataSource } = this
+    const { list, selectedRowKeys } = this
     const { config } = this.dsl.table
 
     if (!config.ready) {
@@ -30,8 +37,10 @@ export default function (table, schema, schemaPathMap) {
       })
 
       // Table rowSelection default event
-      if (config.rowSelection && !config.rowSelection.onChange) {
-        config.rowSelection.onChange = this.onSelect
+      if (config.rowSelection) {
+        if (!config.rowSelection.onChange) {
+          config.rowSelection.onChange = this.onSelect
+        }
       }
 
       // Table expand row render parse
@@ -48,13 +57,24 @@ export default function (table, schema, schemaPathMap) {
       config.ready = true
     }
 
+    if (config.rowSelection) {
+      Vue.set(config.rowSelection, 'selectedRowKeys', selectedRowKeys.valueOf())
+    }
+
+    let pagination = extend(true, {}, config.pagination)
+
+    if (pagination.hidden) {
+      pagination = false
+    }
+
     return h('a-table', {
       attrs: {
         class: 'zero-table'
       },
       props: {
-        dataSource,
-        ...config
+        dataSource: list,
+        ...config,
+        pagination
       },
       on: {
         change: this.onChange
