@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const service = axios.create()
 
-service.interceptors.response.use(function (response) {
+export const interceptor = service.interceptors.response.use(function (response) {
   const { status, data } = response
 
   if (status === 200) {
