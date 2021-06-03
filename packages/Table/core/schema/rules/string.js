@@ -24,8 +24,15 @@ export default function (key, schema, parentSchema, definition = {}) {
     }
 
     if (format === 'date' || format === 'date-time' || format === 'time') {
-      render = function (h, text, record, index) {
-        const value = moment(text).format(options.format || momentFormatMap[format])
+      render = function (h, text = null, record, index) {
+        let value
+        const time = moment(text)
+
+        if (time.isValid()) {
+          value = time.format(options.format || momentFormatMap[format])
+        } else {
+          value = options.empty || ''
+        }
 
         return <span>{ value }</span>
       }
