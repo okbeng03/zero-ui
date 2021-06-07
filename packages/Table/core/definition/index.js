@@ -13,7 +13,7 @@ function parse (dsl, schemaPathMap) {
   return columns
 }
 
-const regArrayKeyword = /\[\]/g
+const regArrayKeyword = /\[(\d+)\]/g
 
 function traverse (definition, schemaPathMap) {
   let key = typeof definition === 'string' ? definition : definition.dataIndex || definition.key
