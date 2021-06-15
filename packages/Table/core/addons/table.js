@@ -29,7 +29,7 @@ export default function (table, schema, schemaPathMap) {
       config.columns = config.columns.map(column => {
         if (column.render) {
           column.customRender = (text, record, index) => {
-            return column.render.call(this.$parent, this.$createElement, text, record, index)
+            return column.render.call(this.context, this.$createElement, text, record, index)
           }
         }
 

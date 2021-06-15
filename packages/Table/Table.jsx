@@ -44,6 +44,7 @@ export default {
 
     this.dsl = dsl
     this.params = dsl.search.config.params
+    this.context = definition.context || this.$parent
   },
   mounted () {
     this.fetch()
@@ -106,22 +107,24 @@ export default {
         }
       }
 
-      table.config.loading = true
-
       // search callback
       if (search.config.fetch && typeof search.config.fetch === 'function') {
+        table.config.loading = true
         search.config.fetch.call(this, searchParam)
       } else {
-        this.$request({
-          method: search.config.method,
-          url: search.config.api,
-          data: searchParam
-        }).then(data => {
-          this.onFetchSuccess(data)
-        }).catch(err => {
-          console.error(err)
-          this.onFetchFail(err.message)
-        })
+        if (search.config.api) {
+          table.config.loading = true
+          this.$request({
+            method: search.config.method,
+            url: search.config.api,
+            data: searchParam
+          }).then(data => {
+            this.onFetchSuccess(data)
+          }).catch(err => {
+            console.error(err)
+            this.onFetchFail(err.message)
+          })
+        }
       }
     },
     onFetchSuccess (data) {
