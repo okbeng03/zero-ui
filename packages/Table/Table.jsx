@@ -76,10 +76,7 @@ export default {
     fetch () {
       const { pagination, filters, sorter, params } = this
       const { search, table } = this.dsl
-
-      if (!search.config.api) {
-        return
-      }
+      const defaultParams = search.config.params || {}
 
       // filters
       const filtersParam = {}
@@ -103,7 +100,10 @@ export default {
         ...pagination,
         filters: filtersParam,
         sorter: sorterParam,
-        search: params
+        search: {
+          ...defaultParams,
+          ...params
+        }
       }
 
       table.config.loading = true
