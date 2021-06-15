@@ -53,7 +53,7 @@ export default function (operation = {}) {
 
   const render = function (h) {
     const childrens = actions.map(children => {
-      return children.render.call(this, h)
+      return children.render.call(this.context, h)
     })
 
     return h('div', {
