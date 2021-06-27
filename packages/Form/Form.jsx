@@ -10,7 +10,11 @@ export default {
   props: {
     definition: Object,
     schema: Object,
-    defaultValue: [Object, Array]
+    defaultValue: [Object, Array],
+    loading: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {

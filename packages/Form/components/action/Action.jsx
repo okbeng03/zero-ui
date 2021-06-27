@@ -2,9 +2,14 @@ const Action = {
   name: 'zero-action',
   props: {
     config: Object,
-    form: Object
+    form: Object,
+    loading: {
+      type: Boolean,
+      default: false
+    }
   },
   render (h) {
+    const { loading } = this
     const { wrapperCol, labelCol, hideReset, okText, cancelText } = this.config
     const actionWrapperCol = wrapperCol ? {
       span: wrapperCol.span,
@@ -15,13 +20,13 @@ const Action = {
         title="确认重置？"
         onConfirm={ () => this.handleClear() }
       >
-        <a-button type="danger" style="margin-left: 16px;">{ cancelText }</a-button>
+        <a-button loading={ loading } type="danger" style="margin-left: 16px;">{ cancelText }</a-button>
       </a-popconfirm>
     )
 
     return (
       <a-form-item wrapperCol={ actionWrapperCol }>
-        <a-button type="primary" html-type="submit">{ okText }</a-button>
+        <a-button loading={ loading } type="primary" html-type="submit">{ okText }</a-button>
         { resetBtn }
       </a-form-item>
     )

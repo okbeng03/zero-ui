@@ -15,7 +15,7 @@ export default function (definition, schema, schemaPathMap) {
   delete config.items
  
   const render = function (h) {
-    const { form } = this
+    const { form, loading } = this
     const { config } = this.dsl.form
 
     return h('a-form', {
@@ -36,7 +36,8 @@ export default function (definition, schema, schemaPathMap) {
       h('zero-action', {
         props: {
           config,
-          form
+          form,
+          loading
         }
       })
     ])
