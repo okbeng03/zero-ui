@@ -7,7 +7,11 @@ export default {
   props: {
     definition: Object,
     schema: Object,
-    dataSource: Array
+    dataSource: Array,
+    lazy: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
@@ -38,9 +42,11 @@ export default {
     this.context = definition.context || this.$parent
   },
   mounted () {
-    this.fetch()
+    const { dataSource, lazy } = this
 
-    const { dataSource } = this
+    if (!lazy) {
+      this.fetch()
+    }
 
     if (dataSource && dataSource.length) {
       this.list = dataSource
