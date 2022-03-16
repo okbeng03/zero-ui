@@ -22,7 +22,8 @@ export default function (search = {}, schema) {
         },
         on: {
           submit: this.onSearch
-        }
+        },
+        ref: 'search'
       })
     } else {
       return null

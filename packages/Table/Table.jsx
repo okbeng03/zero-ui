@@ -160,6 +160,18 @@ export default {
     },
     onSelect (selectedRowKeys) {
       this.selectedRowKeys = selectedRowKeys
+    },
+    // 刷新请求
+    reload (fromStart) {
+      if (fromStart === true) {
+        const { config } = this.dsl.table
+        config.pagination = {
+          ...config.pagination,
+          current: 1
+        }
+      }
+
+      this.fetch()
     }
   }
 }
