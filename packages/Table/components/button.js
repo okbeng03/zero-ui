@@ -14,6 +14,7 @@ export default function (options) {
     if (confirm) {
       return h('a-popconfirm', {
         props: {
+          ...confirm,
           okText: confirm.okText || '确定',
           cancelText: confirm.cancelText || '取消',
           title: confirm.title || '操作前请三思...'
