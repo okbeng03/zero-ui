@@ -25,7 +25,7 @@ export default function (schema, parentSchema, def) {
       const childType = def.items[0].type
       let flag = false
 
-      if (typeof childType !== 'undefined' && childType !== 'zero-inline') {
+      if (childType === 'zero-fieldset') {
         return definition
       }
 
