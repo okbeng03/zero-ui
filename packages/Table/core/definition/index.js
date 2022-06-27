@@ -3,9 +3,12 @@ import { find, isFunction } from 'lodash'
 import ObjectPath from 'objectpath'
 import schemaParser from '../schema'
 import defaultRule from '../schema/rules/default'
-import rules from './rule'
+import rules, { hooks } from './rule'
 
 function parse (dsl, schemaPathMap) {
+  // before
+  dsl = hooks.beforeParse(dsl)
+
   const columns = dsl.map(function (definition) {
     return traverse(definition, schemaPathMap)
   })
@@ -62,7 +65,8 @@ function traverse (definition, schemaPathMap) {
 }
 
 export {
-  rules
+  rules,
+  hooks
 }
 
 export default parse

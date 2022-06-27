@@ -6,3 +6,9 @@ export default [
     parse: operationParser
   }
 ]
+
+export const hooks = {
+  beforeParse: function (columns) {
+    return columns
+  }
+}
