@@ -1,5 +1,5 @@
 export default function (options) {
-  const { type = 'default', action, confirm, text } = options
+  const { type = 'default', action, confirm, text, ...attr } = options
   const children = text
 
   const render = function (h, text, record, index) {
@@ -7,6 +7,7 @@ export default function (options) {
       type
     }
     const attrs = {
+      ...attr,
       class: 'zero-button'
     }
     const _action = ($event) => this[action]($event, text, record, index)
