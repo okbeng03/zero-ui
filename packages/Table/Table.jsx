@@ -71,7 +71,7 @@ export default {
     }, childrends)
   },
   methods: {
-    fetch () {
+    async fetch () {
       const { pagination, filters, sorter, params } = this
       const { search, table } = this.dsl
       const defaultParams = search.config.params || {}
@@ -112,10 +112,16 @@ export default {
         if (search.config.api) {
           table.config.loading = true
 
+          let params = searchParam
+
+          if (search.config.interceptors.transformRequest) {
+            params = await search.config.interceptors.transformRequest(searchParam)
+          }
+
           let options = {
             method: search.config.method,
             url: search.config.api,
-            data: searchParam
+            data: params
           }
 
           // 请求拦截器
