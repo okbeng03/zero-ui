@@ -111,20 +111,37 @@ export default {
       } else {
         if (search.config.api) {
           table.config.loading = true
-          this.$request({
+
+          let options = {
             method: search.config.method,
             url: search.config.api,
             data: searchParam
-          }).then(data => {
+          }
+
+          // 请求拦截器
+          if (search.config.axios) {
+            options = {
+              ...search.config.axios,
+              ...options
+            }
+          }
+
+          this.$request(options).then(data => {
             this.onFetchSuccess(data)
           }).catch(err => {
             console.error(err)
-            this.onFetchFail(err.message)
+            this.onFetchFail(err)
           })
         }
       }
     },
-    onFetchSuccess (data) {
+    async onFetchSuccess (data) {
+      const { interceptors } = this.dsl.search.config
+
+      if (interceptors.success) {
+        data = await interceptors.success(data)
+      }
+
       const { list = [], total = 0 } = data
 
       this.list = list
@@ -132,9 +149,17 @@ export default {
       this.$emit('search', data)
       this.dsl.table.config.loading = false
     },
-    onFetchFail (message = '网络异常，请稍后再试！') {
-      this.$message.error(message)
+    onFetchFail (err) {
+      const { interceptors } = this.dsl.search.config
+
       this.dsl.table.config.loading = false
+
+      if (interceptors.fail) {
+        interceptors.fail(err)
+      } else {
+        this.$message.error(err.message || '网络异常，请稍后再试！')
+      }
+      
     },
     onChange (pagination, filters, sorter) {
       const { config } = this.dsl.table

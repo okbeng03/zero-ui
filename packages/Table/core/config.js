@@ -26,6 +26,7 @@ export default {
       validate: false,
       hideRequiredMark: true
     },
-    params: {}
+    params: {},
+    interceptors: {}
   }
 }
