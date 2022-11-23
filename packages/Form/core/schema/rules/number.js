@@ -10,11 +10,11 @@ export default function (schema) {
       input: {}
     }
 
-    if (schema.minimum) {
+    if (typeof schema.minimum === 'number') {
       definition.input.min = schema.minimum
     }
 
-    if (schema.maximum) {
+    if (typeof schema.maximum === 'number') {
       definition.input.max = schema.maximum
     }
 
