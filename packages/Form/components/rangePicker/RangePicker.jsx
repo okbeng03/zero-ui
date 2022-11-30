@@ -4,48 +4,31 @@ import FormMixin from '../../mixins/form'
 const DateTimePicker = {
   name: 'zero-range-picker',
   mixins: [ FormMixin ],
-  data () {
-    return {
-      stateValue: []
-    }
-  },
   computed: {
     format () {
-      const { type, format } = this.definition.items[0].input
+      const { type, format } = this.definition.input || this.definition.items[0].input
 
       return format || (type === 'time' ? 'HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss')
     }
   },
-  mounted () {
+  render (h) {
+    const { definition } = this
+    const { type } = definition.input
     const vals = []
 
     this.definition.items.forEach(item => {
       const id = this.getDecoratorId(item.key)
-      
-      let val = this.getFieldDefaultValue(id)
-
-      if (typeof val === 'undefined') {
-        val = typeof item.schema.default !== 'undefined'
-        ? item.schema.default : undefined
-      }
+      let val = this.form.getFieldValue(id)
 
       if (typeof val !== 'undefined') {
-        this.form.setFieldsValue({
-          [id]: val
-        })
         vals.push(moment(val))
       }
     })
 
-    this.stateValue = vals
-  },
-  render (h) {
-    const { definition, stateValue } = this
-    const { type } = definition.input
     const inputProps = {
       props: {
         ...definition.input,
-        value: stateValue
+        value: vals
       }
     }
 
