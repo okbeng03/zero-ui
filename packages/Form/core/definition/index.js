@@ -84,11 +84,11 @@ function traverse (def, schemaPathMap, parentSchema, definition) {
 // 扁平结构组装成嵌套结构
 function construct (schemaPathMapKeys, parent, parentPath = '') {
   const keys = schemaPathMapKeys.slice()
-  const leafs = remove(keys, item => item.indexOf('[0]') <= 0 && item.indexOf('.') < 0)
+  const leafs = remove(keys, item => (item.indexOf('[0]') < 0 && item.indexOf('.') < 0) || item === '[0]')
 
   leafs.forEach(key => {
     // 找出子节点
-    const childs = remove(keys, item => new RegExp(`${key}(\\.|\\[0\\])`).test(item) || item.indexOf('[0]') === 0).map(item => item.replace(key === '[0]' ? '[0].' : new RegExp(`${key}\\.?`), ''))
+    const childs = remove(keys, item => new RegExp(`${key}(\\.|\\[0\\])`).test(item) || item.indexOf('[0]') === 0).map(item => item.replace(key === '[0]' ? new RegExp('\\[0\\]\\.?') : new RegExp(`${key}\\.?`), ''))
     const path = `${parentPath}${key}`
 
     if (childs.length) {
