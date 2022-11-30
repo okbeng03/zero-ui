@@ -44,15 +44,24 @@ export default function (schema, parentSchema, def) {
         const col = Math.floor(24 / len)
 
         _.each(def.items[0].items, (item) => {
-          const key = ObjectPath.parse(item.key).pop()
-          const required = childSchema.required && _.indexOf(childSchema.required, key) !== -1
-          const val = childSchema.properties[key]
+          const key = item.key ? ObjectPath.parse(item.key).pop() : ''
+          const { formItem = {} } = item
 
-          columns.push({
-            col,
-            label: val.title || '',
-            required
-          })
+          if (key) {
+            const required = childSchema.required && _.indexOf(childSchema.required, key) !== -1
+            const val = childSchema.properties[key]
+
+            columns.push({
+              col,
+              label: formItem.label || val.title || '',
+              required
+            })
+          } else {
+            columns.push({
+              col,
+              label: formItem.label || ''
+            })
+          }
         })
 
         definition.columns = columns
