@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash'
 import moment from 'moment'
 import FormMixin from '../../mixins/form'
 
@@ -6,7 +7,8 @@ const DateTimePicker = {
   mixins: [ FormMixin ],
   computed: {
     format () {
-      const { type, format } = this.definition.input || this.definition.items[0].input
+      const { definition } = this
+      const { type, format } = !isEmpty(definition.input) ? definition.input : definition.items[0].input
 
       return format || (type === 'time' ? 'HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss')
     }
