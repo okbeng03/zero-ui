@@ -20,17 +20,18 @@ const DateTimePicker = {
 
     this.definition.items.forEach(item => {
       const id = this.getDecoratorId(item.key)
-      let val = this.form.getFieldValue(id)
+      const val = this.form.getFieldValue(id)
+      const value = moment(val ? val : null)
 
-      if (typeof val !== 'undefined') {
-        vals.push(moment(val))
+      if (value.isValid()) {
+        vals.push(value)
       }
     })
 
     const inputProps = {
       props: {
         ...definition.input,
-        value: vals
+        value: vals.length ? vals : null
       }
     }
 
