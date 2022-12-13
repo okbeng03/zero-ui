@@ -74,7 +74,6 @@ export default {
     async fetch () {
       const { pagination, filters, sorter, params } = this
       const { search, table } = this.dsl
-      const defaultParams = search.config.params || {}
 
       // filters
       const filtersParam = {}
@@ -99,7 +98,6 @@ export default {
         filters: filtersParam,
         sorter: sorterParam,
         search: {
-          ...defaultParams,
           ...params
         }
       }
