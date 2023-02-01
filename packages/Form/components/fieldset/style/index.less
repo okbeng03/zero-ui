@@ -1,6 +1,24 @@
+.zero-fieldset {
+  .zero-expand {
+    display: none;
+  }
+}
+
 .zero-fieldset-vertical {
   padding: 16px;
   border: 1px dashed #d9d9d9;
+
+  &.close {
+    height: 30px;
+    overflow: hidden;
+  }
+
+  .zero-expand  {
+    display: block;
+    top: 12px;
+    right: 30px;
+    z-index: 1;
+  }
 
   > .ant-row {
     > .ant-form-item-label,

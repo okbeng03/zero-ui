@@ -9,7 +9,8 @@ const List = {
     return {
       id: '',
       size: 0,
-      list: []
+      list: [],
+      toggle: true
     }
   },
   created () {
@@ -35,13 +36,19 @@ const List = {
     })
   },
   render (h) {
-    const { definition, list } = this
+    const { definition, list, toggle } = this
     const classes = classNames('zero-list', {
-      'zero-list-inline': definition.columns
+      'zero-list-inline': definition.columns,
+      'close': !toggle
     })
 
     return (
       <div class={ classes }>
+        <span class="zero-expand" onClick={() => {this.toggle = !this.toggle}}>
+          {
+            toggle ? <a-icon title="收起" type="caret-up" /> : <a-icon title="展开" type="caret-down" />
+          }
+        </span>
         { this.renderHeader(h) }
         <draggable class="zero-list-body" value={ list } draggable=".zero-list-item" onEnd={ this.onDrop }>
           { this.renderItems(h) }
@@ -109,10 +116,11 @@ const List = {
               child,
               h('a-icon', {
                 attrs: {
-                  class: 'btn-delete'
+                  class: 'btn-delete',
+                  title: '删除'
                 },
                 props: {
-                  type: 'minus-circle-o'
+                  type: 'delete'
                 },
                 on: {
                   click: () => this.remove(idx)
