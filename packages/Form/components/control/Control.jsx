@@ -1,5 +1,8 @@
 import extend from 'extend'
 import FormMixin from '../../mixins/form'
+import { pick } from "lodash"
+
+const propsKey = ["class", "style", "domProps", "on", "nativeOn", "directives", "scopedSlots", "slot", "key", "ref", "refInFor"];
 
 const Control = {
   name: 'zero-control',
@@ -43,7 +46,8 @@ const Control = {
       },
       attrs: {
         ...(definition.attrs || {})
-      }
+      },
+      ...(pick(definition.input || {}, propsKey))
     }
 
     if (definition.decorator) {
