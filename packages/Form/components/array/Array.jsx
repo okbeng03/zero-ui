@@ -176,7 +176,7 @@ const List = {
       this.form.setFieldsValue({
         [id]: value
       })
-      this.size -= 1
+      this.updateModel(value, id);
     },
     onDrop (e) {
       const { newIndex, oldIndex } = e
@@ -184,6 +184,7 @@ const List = {
       const value = this.form.getFieldValue(id)
       const moveItem = value.splice(oldIndex, 1)
       value.splice(newIndex, 0, moveItem[0])
+      this.updateModel(value, id);
 
       this.$nextTick(() => {
         this.form.setFieldsValue({

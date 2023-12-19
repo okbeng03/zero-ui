@@ -1,5 +1,5 @@
 import ObjectPath from 'objectpath'
-import { findIndex, filter, isEqual } from 'lodash'
+import { findIndex, filter, cloneDeep, set } from 'lodash'
 import generate from './core'
 import addons from './core/addons'
 import localize from './validate/localize'
@@ -19,14 +19,7 @@ export default {
   data () {
     return {
       // dsl: {},
-      form: this.$form.createForm(this, {
-        onValuesChange: (props, values) => {
-          // 监听数据变化时，要更新model，保证数组重新生成item
-          if (isEqual(Object.keys(values), Object.keys(this.model.value))) {
-            this.model.value = values
-          }
-        }
-      }),
+      form: this.$form.createForm(this),
       model: {
         value: null
       }
@@ -44,7 +37,8 @@ export default {
     return {
       form: this.form,
       model: this.model,
-      handleFieldValidate: this.handleFieldValidate.bind(this)
+      handleFieldValidate: this.handleFieldValidate.bind(this),
+      updateModel: this.updateModel.bind(this)
     }
   },
   created () {
@@ -179,6 +173,15 @@ export default {
         }
 
         this.$forceUpdate()
+      }
+    },
+    updateModel (values, id) {
+      if (id) {
+        const model = cloneDeep(this.form.getFieldsValue())
+        set(model, id, values)
+        this.model.value = model
+      } else {
+        this.model.value = values
       }
     }
   }

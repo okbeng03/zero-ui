@@ -14,7 +14,8 @@ export default {
   inject: [
     'form',
     'model',
-    'handleFieldValidate'
+    'handleFieldValidate',
+    'updateModel'
   ],
   methods: {
     getFieldDefaultValue (key) {
