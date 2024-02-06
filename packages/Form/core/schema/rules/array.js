@@ -31,12 +31,17 @@ export default function (schema, parentSchema, def) {
 
       if (len <= 6) {
         flag = true
+
         each(childSchema.properties, val => {
           if (val.type === 'object' || val.type === 'array') {
             flag = false
             return false
           }
         })
+      }
+
+      if (!flag && childType === 'zero-list-inline') {
+        flag = true
       }
 
       if (flag) {
