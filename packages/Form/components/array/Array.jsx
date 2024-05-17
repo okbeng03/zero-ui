@@ -29,6 +29,9 @@ const List = {
 
         this.size = len
         this.list = list
+      } else {
+        this.size = 0;
+        this.list = [];
       }
     }, {
       deep: true,
