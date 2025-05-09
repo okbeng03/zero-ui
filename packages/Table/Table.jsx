@@ -148,6 +148,8 @@ export default {
 
       const { list = [], total = 0 } = data
 
+      // 清空已选择 Items
+      this.selectedRowKeys = []
       this.list = list
       this.dsl.table.config.pagination.total = total
       this.$emit('search', data)
